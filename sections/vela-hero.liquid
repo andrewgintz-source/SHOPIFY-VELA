@@ -1,0 +1,934 @@
+{% comment %}
+  VELA — Animated Hero Section
+  Pain point: Stress & overwhelm
+  Animations: orbs, word reveal, mouse parallax, shimmer, counter
+{% endcomment %}
+
+<style>
+  /* ── Reset & Base ── */
+  #vela-hero-{{ section.id }} {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0A0810;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  /* ── Grain overlay ── */
+  #vela-hero-{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 180px;
+    opacity: 0.038;
+    pointer-events: none;
+    z-index: 1;
+    animation: vela-grain 0.5s steps(1) infinite;
+  }
+
+  @keyframes vela-grain {
+    0%  { transform: translate(0, 0); }
+    10% { transform: translate(-2%, -3%); }
+    20% { transform: translate(3%, 2%); }
+    30% { transform: translate(-1%, 4%); }
+    40% { transform: translate(4%, -1%); }
+    50% { transform: translate(-3%, 1%); }
+    60% { transform: translate(2%, -4%); }
+    70% { transform: translate(-4%, 3%); }
+    80% { transform: translate(1%, -2%); }
+    90% { transform: translate(-2%, 4%); }
+  }
+
+  /* ── Animated Orbs ── */
+  .vela-hero__orbs {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .vela-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0;
+    animation: vela-orb-fade-in 1.8s forwards;
+  }
+
+  .vela-orb--1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #7A4A9A 0%, transparent 70%);
+    top: -15%;
+    right: -8%;
+    animation-delay: 0.2s;
+    animation: vela-orb-fade-in 1.8s 0.2s forwards, vela-float-1 18s 2s ease-in-out infinite;
+  }
+
+  .vela-orb--2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #C190D0 0%, transparent 70%);
+    bottom: -10%;
+    left: 30%;
+    animation: vela-orb-fade-in 1.8s 0.5s forwards, vela-float-2 22s 2.3s ease-in-out infinite;
+  }
+
+  .vela-orb--3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, #DDB8EA 0%, transparent 70%);
+    top: 20%;
+    left: -5%;
+    animation: vela-orb-fade-in 1.8s 0.8s forwards, vela-float-3 16s 2.6s ease-in-out infinite;
+  }
+
+  .vela-orb--4 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, #A568C0 0%, transparent 70%);
+    top: 60%;
+    right: 15%;
+    animation: vela-orb-fade-in 1.8s 1.1s forwards, vela-float-4 20s 3s ease-in-out infinite;
+  }
+
+  @keyframes vela-orb-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes vela-float-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25%  { transform: translate(-30px, 40px) scale(1.04); }
+    50%  { transform: translate(20px, -30px) scale(0.97); }
+    75%  { transform: translate(-15px, -20px) scale(1.02); }
+  }
+
+  @keyframes vela-float-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    30%  { transform: translate(40px, -50px) scale(1.05); }
+    60%  { transform: translate(-25px, 30px) scale(0.96); }
+  }
+
+  @keyframes vela-float-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    40%  { transform: translate(35px, 25px) scale(1.06); }
+    70%  { transform: translate(-20px, -35px) scale(0.95); }
+  }
+
+  @keyframes vela-float-4 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    35%  { transform: translate(-40px, -30px) scale(1.08); }
+    65%  { transform: translate(25px, 40px) scale(0.94); }
+  }
+
+  /* ── Layout ── */
+  .vela-hero__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  /* ── Left — Content ── */
+  .vela-hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Eyebrow */
+  .vela-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #C190D0;
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: vela-slide-up 0.7s 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .vela-hero__eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #C190D0;
+    animation: vela-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes vela-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  /* Headline */
+  .vela-hero__headline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(3.2rem, 5.5vw, 6rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: #FFFFFF;
+    margin: 0 0 1.6rem;
+  }
+
+  .vela-hero__headline .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(30px) rotateX(20deg);
+    transform-origin: bottom;
+    animation: vela-word-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .vela-hero__headline .word--accent {
+    color: #C190D0;
+    font-style: italic;
+  }
+
+  @keyframes vela-word-in {
+    to {
+      opacity: 1;
+      transform: translateY(0) rotateX(0deg);
+    }
+  }
+
+  /* Sub-headline */
+  .vela-hero__sub {
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.55);
+    max-width: 44ch;
+    margin-bottom: 2.4rem;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: vela-slide-up 0.7s 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .vela-hero__sub strong {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+  }
+
+  /* Divider */
+  .vela-hero__divider {
+    width: 0;
+    height: 1px;
+    background: linear-gradient(90deg, #C190D0, transparent);
+    margin-bottom: 2.4rem;
+    animation: vela-line-in 0.9s 1.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  @keyframes vela-line-in {
+    to { width: 120px; }
+  }
+
+  /* Product intro line */
+  .vela-hero__intro {
+    font-size: 0.88rem;
+    line-height: 1.72;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 42ch;
+    margin-bottom: 2.8rem;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: vela-slide-up 0.7s 1.9s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  /* Social proof row */
+  .vela-hero__proof {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 2.8rem;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: vela-slide-up 0.7s 2.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .vela-hero__stars {
+    display: flex;
+    gap: 3px;
+  }
+
+  .vela-hero__star {
+    width: 15px;
+    height: 15px;
+    fill: #C190D0;
+  }
+
+  .vela-hero__proof-text {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.04em;
+  }
+
+  .vela-hero__proof-count {
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .vela-hero__proof-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .vela-hero__proof-badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #C190D0;
+    background: rgba(193, 144, 208, 0.12);
+    border: 1px solid rgba(193, 144, 208, 0.25);
+    border-radius: 100px;
+    padding: 0.3rem 0.9rem;
+  }
+
+  /* CTA Button */
+  .vela-hero__cta-wrap {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: vela-slide-up 0.7s 2.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .vela-hero__cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #0A0810;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 100px;
+    padding: 1.1rem 2.6rem;
+    cursor: pointer;
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Shimmer sweep */
+  .vela-hero__cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(193, 144, 208, 0.35), transparent);
+    animation: vela-shimmer 2.8s 3s ease-in-out infinite;
+  }
+
+  @keyframes vela-shimmer {
+    0%   { left: -100%; }
+    40%  { left: 140%; }
+    100% { left: 140%; }
+  }
+
+  .vela-hero__cta:hover {
+    background: #C190D0;
+    color: #FFFFFF;
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(193, 144, 208, 0.4);
+  }
+
+  .vela-hero__cta-arrow {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .vela-hero__cta:hover .vela-hero__cta-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Secondary link */
+  .vela-hero__learn {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 2px;
+    transition: all 0.2s ease;
+  }
+
+  .vela-hero__learn:hover {
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* ── Right — Product ── */
+  .vela-hero__visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: vela-fade-scale 1.2s 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes vela-fade-scale {
+    from { opacity: 0; transform: scale(0.88) translateY(24px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* Glow ring behind product */
+  .vela-hero__product-glow {
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(193, 144, 208, 0.22) 0%, transparent 70%);
+    animation: vela-glow-pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes vela-glow-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50%       { transform: scale(1.12); opacity: 1; }
+  }
+
+  /* Orbit ring */
+  .vela-hero__orbit {
+    position: absolute;
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    border: 1px solid rgba(193, 144, 208, 0.12);
+    animation: vela-orbit-spin 30s linear infinite;
+  }
+
+  .vela-hero__orbit::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #C190D0;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 12px #C190D0;
+  }
+
+  @keyframes vela-orbit-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* Second orbit (counter) */
+  .vela-hero__orbit--2 {
+    width: 460px;
+    height: 460px;
+    border-color: rgba(122, 74, 154, 0.08);
+    animation: vela-orbit-spin 45s linear infinite reverse;
+  }
+
+  .vela-hero__orbit--2::after {
+    background: #7A4A9A;
+    box-shadow: 0 0 10px #7A4A9A;
+    width: 6px;
+    height: 6px;
+    top: -3px;
+  }
+
+  /* Product image */
+  .vela-hero__product-wrap {
+    position: relative;
+    z-index: 2;
+    will-change: transform;
+    animation: vela-product-float 6s ease-in-out infinite;
+    transition: transform 0.1s ease-out;
+  }
+
+  @keyframes vela-product-float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-18px); }
+  }
+
+  .vela-hero__product-img {
+    width: 280px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 30px 80px rgba(122, 74, 154, 0.5))
+            drop-shadow(0 0 40px rgba(193, 144, 208, 0.25));
+    transition: filter 0.3s ease;
+  }
+
+  .vela-hero__visual:hover .vela-hero__product-img {
+    filter: drop-shadow(0 40px 100px rgba(122, 74, 154, 0.65))
+            drop-shadow(0 0 60px rgba(193, 144, 208, 0.35));
+  }
+
+  /* Floating badges */
+  .vela-hero__badge {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 0.8rem 1.2rem;
+    z-index: 3;
+    opacity: 0;
+    animation: vela-badge-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .vela-hero__badge--1 {
+    top: 12%;
+    right: -2%;
+    animation-delay: 1.6s;
+  }
+
+  .vela-hero__badge--2 {
+    bottom: 18%;
+    left: -4%;
+    animation-delay: 1.9s;
+  }
+
+  @keyframes vela-badge-in {
+    from { opacity: 0; transform: translateY(12px) scale(0.92); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .vela-hero__badge-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 3px;
+    display: block;
+  }
+
+  .vela-hero__badge-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 1;
+  }
+
+  .vela-hero__badge-value span {
+    font-size: 0.7rem;
+    font-family: 'DM Sans', sans-serif;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 400;
+  }
+
+  /* ── Scroll indicator ── */
+  .vela-hero__scroll {
+    position: absolute;
+    bottom: 2.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    animation: vela-slide-up 0.6s 3s forwards;
+  }
+
+  .vela-hero__scroll-text {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .vela-hero__scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(193, 144, 208, 0.5), transparent);
+    animation: vela-scroll-line 2s ease-in-out infinite;
+  }
+
+  @keyframes vela-scroll-line {
+    0%   { transform: scaleY(0); transform-origin: top; }
+    50%  { transform: scaleY(1); transform-origin: top; }
+    50.01% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ── Shared animation ── */
+  @keyframes vela-slide-up {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 989px) {
+    .vela-hero__inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: 7rem 1.5rem 5rem;
+      gap: 3rem;
+    }
+
+    .vela-hero__sub,
+    .vela-hero__intro {
+      max-width: 100%;
+    }
+
+    .vela-hero__proof,
+    .vela-hero__cta-wrap {
+      justify-content: center;
+    }
+
+    .vela-hero__visual {
+      order: -1;
+    }
+
+    .vela-hero__product-img {
+      width: 200px;
+    }
+
+    .vela-hero__orbit   { width: 280px; height: 280px; }
+    .vela-hero__orbit--2 { width: 340px; height: 340px; }
+    .vela-hero__product-glow { width: 300px; height: 300px; }
+
+    .vela-hero__badge--1 { right: 5%; }
+    .vela-hero__badge--2 { left: 2%; }
+
+    .vela-hero__scroll { display: none; }
+
+    .vela-orb--1 { width: 400px; height: 400px; }
+    .vela-orb--2 { width: 300px; height: 300px; }
+  }
+
+  @media (max-width: 480px) {
+    .vela-hero__headline { font-size: 2.8rem; }
+    .vela-hero__badge { display: none; }
+  }
+</style>
+
+<section id="vela-hero-{{ section.id }}" aria-label="Vela Hero">
+
+  <!-- Animated orbs -->
+  <div class="vela-hero__orbs" aria-hidden="true">
+    <div class="vela-orb vela-orb--1"></div>
+    <div class="vela-orb vela-orb--2"></div>
+    <div class="vela-orb vela-orb--3"></div>
+    <div class="vela-orb vela-orb--4"></div>
+  </div>
+
+  <div class="vela-hero__inner">
+
+    <!-- Left: Content -->
+    <div class="vela-hero__content">
+
+      <div class="vela-hero__eyebrow">
+        <span class="vela-hero__eyebrow-dot"></span>
+        {{ section.settings.eyebrow | default: 'Introducing Vela' }}
+      </div>
+
+      <h1 class="vela-hero__headline" id="vela-headline-{{ section.id }}">
+        {{ section.settings.headline | default: 'Modern life is relentless. Your body remembers.' }}
+      </h1>
+
+      <p class="vela-hero__sub">
+        {{ section.settings.subheadline | default: 'Deadlines. Notifications. The weight of everything. Your nervous system has been running on empty — and it's <strong>paying the price.</strong>' }}
+      </p>
+
+      <div class="vela-hero__divider"></div>
+
+      <p class="vela-hero__intro">
+        {{ section.settings.intro | default: 'Reishi Calm Drops is a daily adaptogen tincture crafted to quiet the noise — supporting your body\'s natural stress response so you can finally breathe again.' }}
+      </p>
+
+      <!-- Social proof -->
+      <div class="vela-hero__proof">
+        <div class="vela-hero__stars" aria-label="5 stars">
+          {%- for i in (1..5) -%}
+            <svg class="vela-hero__star" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/>
+            </svg>
+          {%- endfor -%}
+        </div>
+        <span class="vela-hero__proof-text">
+          <span class="vela-hero__proof-count" data-count="{{ section.settings.review_count | default: 2847 }}">0</span>
+          &nbsp;reviews
+        </span>
+        <div class="vela-hero__proof-divider" aria-hidden="true"></div>
+        <span class="vela-hero__proof-badge">{{ section.settings.proof_badge | default: 'Natural ingredients' }}</span>
+      </div>
+
+      <!-- CTA -->
+      <div class="vela-hero__cta-wrap">
+        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="vela-hero__cta">
+          {{ section.settings.cta_text | default: 'Shop now' }}
+          <svg class="vela-hero__cta-arrow" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M1 7h12M7.5 1.5L13 7l-5.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        {%- if section.settings.learn_url != blank -%}
+          <a href="{{ section.settings.learn_url }}" class="vela-hero__learn">
+            {{ section.settings.learn_text | default: 'Learn how it works' }}
+          </a>
+        {%- endif -%}
+      </div>
+
+    </div><!-- /content -->
+
+    <!-- Right: Product visual -->
+    <div class="vela-hero__visual" id="vela-visual-{{ section.id }}" aria-hidden="true">
+
+      <!-- Glow + orbits -->
+      <div class="vela-hero__product-glow"></div>
+      <div class="vela-hero__orbit"></div>
+      <div class="vela-hero__orbit vela-hero__orbit--2"></div>
+
+      <!-- Product image -->
+      <div class="vela-hero__product-wrap" id="vela-product-{{ section.id }}">
+        {%- if section.settings.product_image != blank -%}
+          {{ section.settings.product_image | image_url: width: 600 | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            class: 'vela-hero__product-img',
+            alt: section.settings.product_image.alt | escape
+          }}
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'vela-hero__product-img' }}
+        {%- endif -%}
+      </div>
+
+      <!-- Floating badge 1 -->
+      <div class="vela-hero__badge vela-hero__badge--1">
+        <span class="vela-hero__badge-label">Serving size</span>
+        <span class="vela-hero__badge-value">1ml <span>/ daily</span></span>
+      </div>
+
+      <!-- Floating badge 2 -->
+      <div class="vela-hero__badge vela-hero__badge--2">
+        <span class="vela-hero__badge-label">Key ingredient</span>
+        <span class="vela-hero__badge-value">Reishi <span>extract</span></span>
+      </div>
+
+    </div><!-- /visual -->
+
+  </div><!-- /inner -->
+
+  <!-- Scroll indicator -->
+  <div class="vela-hero__scroll" aria-hidden="true">
+    <span class="vela-hero__scroll-text">Scroll</span>
+    <div class="vela-hero__scroll-line"></div>
+  </div>
+
+</section>
+
+<script>
+(function () {
+  'use strict';
+
+  const heroId = 'vela-hero-{{ section.id }}';
+
+  /* ── Word-by-word headline animation ── */
+  function initHeadline() {
+    const el = document.getElementById('vela-headline-{{ section.id }}');
+    if (!el) return;
+
+    const rawText = el.textContent;
+    const words = rawText.trim().split(/\s+/);
+    el.innerHTML = words.map((w, i) => {
+      const isAccent = ['relentless.', 'relentless', 'calm', 'breathe', 'price.'].includes(w.toLowerCase());
+      const cls = isAccent ? 'word word--accent' : 'word';
+      const delay = (0.55 + i * 0.08).toFixed(2);
+      return `<span class="${cls}" style="animation-delay:${delay}s">${w}</span> `;
+    }).join('');
+  }
+
+  /* ── Review count-up ── */
+  function initCounter() {
+    const el = document.querySelector(`#${heroId} [data-count]`);
+    if (!el) return;
+
+    const target = parseInt(el.dataset.count, 10);
+    const duration = 2200;
+    const start = performance.now();
+
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      el.textContent = Math.round(easeOut(progress) * target).toLocaleString();
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    // Start counter when section enters viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => requestAnimationFrame(tick), 2200);
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const section = document.getElementById(heroId);
+    if (section) observer.observe(section);
+  }
+
+  /* ── Mouse parallax on product ── */
+  function initParallax() {
+    const visual = document.getElementById('vela-visual-{{ section.id }}');
+    const product = document.getElementById('vela-product-{{ section.id }}');
+    if (!visual || !product) return;
+
+    let animFrame;
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      targetX = ((e.clientX / vw) - 0.5) * 22;
+      targetY = ((e.clientY / vh) - 0.5) * 14;
+    });
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function animate() {
+      currentX = lerp(currentX, targetX, 0.06);
+      currentY = lerp(currentY, targetY, 0.06);
+
+      // Pause CSS float animation during parallax
+      product.style.animationPlayState = 'paused';
+      product.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
+      animFrame = requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Remove parallax on mobile
+    if (window.matchMedia('(max-width: 989px)').matches) {
+      cancelAnimationFrame(animFrame);
+      product.style.transform = '';
+      product.style.animationPlayState = 'running';
+    }
+  }
+
+  /* ── Init ── */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initHeadline();
+      initCounter();
+      initParallax();
+    });
+  } else {
+    initHeadline();
+    initCounter();
+    initParallax();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Vela Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Introducing Vela"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Main headline",
+      "default": "Modern life is relentless. Your body remembers."
+    },
+    {
+      "type": "richtext",
+      "id": "subheadline",
+      "label": "Sub-headline",
+      "default": "<p>Deadlines. Notifications. The weight of everything. Your nervous system has been running on empty — and it's paying the price.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Product intro line",
+      "default": "Reishi Calm Drops is a daily adaptogen tincture crafted to quiet the noise — supporting your body's natural stress response so you can finally breathe again."
+    },
+    {
+      "type": "number",
+      "id": "review_count",
+      "label": "Review count",
+      "default": 2847
+    },
+    {
+      "type": "text",
+      "id": "proof_badge",
+      "label": "Trust badge text",
+      "default": "Natural ingredients"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Primary CTA link"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Primary CTA text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "learn_url",
+      "label": "Secondary link URL"
+    },
+    {
+      "type": "text",
+      "id": "learn_text",
+      "label": "Secondary link text",
+      "default": "Learn how it works"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vela Hero"
+    }
+  ]
+}
+{% endschema %}

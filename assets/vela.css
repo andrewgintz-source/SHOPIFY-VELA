@@ -1,263 +1,276 @@
 /* ============================================================
-   VELA — Premium Supplement Theme
-   Brand identity override for Shopify Dawn base
+   VELA — Premium Supplement Theme v2
+   Lavender-dominant · White text · Black accents
+   Clean minimal · High-converting
    ============================================================
 
-   Palette (sourced from Reishi Calm Drops product):
-   --vela-lavender:       #C190D0  (label purple)
-   --vela-lavender-soft:  #E8D5F0  (label tint)
-   --vela-lavender-deep:  #7A4A9A  (rich purple)
-   --vela-amber:          #8B5A2B  (amber bottle glass)
-   --vela-cream:          #FAF8F5  (warm white background)
-   --vela-charcoal:       #1A1714  (near-black text)
-   --vela-stone:          #8A847C  (warm mid-gray)
-   --vela-stone-light:    #D6D0C8  (warm light gray, borders)
+   Palette:
+   --vela-lavender:       #C190D0  (brand purple — hero, CTAs, accents)
+   --vela-lavender-light: #F2E8F7  (page background — airy, soft)
+   --vela-lavender-mid:   #DDB8EA  (section backgrounds, cards)
+   --vela-lavender-deep:  #7A4A9A  (dark lavender — headers, emphasis)
+   --vela-black:          #0D0B0E  (primary text, buttons)
+   --vela-white:          #FFFFFF  (text on lavender, card backgrounds)
+   --vela-off-white:      #FBF8FC  (subtle warm white)
+   --vela-stone:          #9B8FA3  (secondary text)
 
    Typography:
-   Headings — Cormorant Garamond (elegant serif)
+   Headings — Cormorant Garamond (editorial serif)
    Body     — DM Sans (clean modern sans)
    ============================================================ */
 
 /* ─── 1. CSS Custom Properties ─────────────────────────────── */
 :root {
-  --vela-lavender:       #C190D0;
-  --vela-lavender-soft:  #E8D5F0;
-  --vela-lavender-deep:  #7A4A9A;
-  --vela-amber:          #8B5A2B;
-  --vela-cream:          #FAF8F5;
-  --vela-cream-dark:     #F0EBE3;
-  --vela-charcoal:       #1A1714;
-  --vela-stone:          #8A847C;
-  --vela-stone-light:    #D6D0C8;
-  --vela-white:          #FFFFFF;
+  --vela-lavender:        #C190D0;
+  --vela-lavender-light:  #F2E8F7;
+  --vela-lavender-mid:    #DDB8EA;
+  --vela-lavender-pale:   #F8F2FB;
+  --vela-lavender-deep:   #7A4A9A;
+  --vela-lavender-richer: #A568C0;
+  --vela-black:           #0D0B0E;
+  --vela-charcoal:        #1E1A22;
+  --vela-white:           #FFFFFF;
+  --vela-off-white:       #FBF8FC;
+  --vela-stone:           #9B8FA3;
+  --vela-stone-light:     #E2D8EA;
 
-  --vela-font-heading:   'Cormorant Garamond', Georgia, serif;
-  --vela-font-body:      'DM Sans', system-ui, -apple-system, sans-serif;
+  --vela-font-heading:    'Cormorant Garamond', Georgia, serif;
+  --vela-font-body:       'DM Sans', system-ui, -apple-system, sans-serif;
 
-  --vela-radius-sm:      4px;
-  --vela-radius-md:      8px;
-  --vela-radius-lg:      16px;
-  --vela-radius-pill:    100px;
+  --vela-radius-sm:       4px;
+  --vela-radius-md:       10px;
+  --vela-radius-lg:       18px;
+  --vela-radius-xl:       28px;
+  --vela-radius-pill:     100px;
 
-  --vela-shadow-soft:    0 2px 16px rgba(26, 23, 20, 0.07);
-  --vela-shadow-md:      0 6px 32px rgba(26, 23, 20, 0.12);
-  --vela-shadow-product: 0 12px 48px rgba(193, 144, 208, 0.18);
+  --vela-shadow-soft:     0 2px 20px rgba(122, 74, 154, 0.10);
+  --vela-shadow-md:       0 8px 40px rgba(122, 74, 154, 0.16);
+  --vela-shadow-card:     0 4px 24px rgba(13, 11, 14, 0.08);
+  --vela-shadow-hover:    0 12px 48px rgba(122, 74, 154, 0.22);
 
-  --vela-transition:     all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --vela-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --vela-transition:      all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --vela-transition-fast: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Override Dawn's color variables */
+  --color-background:     242, 232, 247;
+  --gradient-background:  #F2E8F7;
 }
 
 /* ─── 2. Base / Document ────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--vela-font-body) !important;
-  background-color: var(--vela-cream) !important;
+  background-color: var(--vela-lavender-light) !important;
   color: var(--vela-charcoal) !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: 0.005em;
 }
 
 /* ─── 3. Typography ─────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: var(--vela-font-heading) !important;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-  color: var(--vela-charcoal);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  color: var(--vela-black);
 }
 
-h1, .h1 { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 300; }
-h2, .h2 { font-size: clamp(2rem, 4vw, 3.6rem); font-weight: 300; }
-h3, .h3 { font-size: clamp(1.5rem, 3vw, 2.4rem); font-weight: 400; }
-h4, .h4 { font-size: clamp(1.2rem, 2vw, 1.7rem); font-weight: 400; }
+h1, .h1 { font-size: clamp(3rem, 7vw, 6rem); }
+h2, .h2 { font-size: clamp(2.2rem, 5vw, 4.2rem); }
+h3, .h3 { font-size: clamp(1.6rem, 3vw, 2.6rem); }
+h4, .h4 { font-size: clamp(1.2rem, 2vw, 1.8rem); }
 
-p, li, span, label, input, select, textarea {
+p, li, span, label, input, select, textarea, button {
   font-family: var(--vela-font-body) !important;
 }
 
-/* Eyebrow / label text utility */
+/* Eyebrow label */
 .vela-eyebrow {
   font-family: var(--vela-font-body);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--vela-lavender-deep);
 }
 
-/* ─── 4. Header / Navigation ────────────────────────────────── */
+/* ─── 4. Header ─────────────────────────────────────────────── */
 .header-wrapper {
-  background-color: rgba(250, 248, 245, 0.92) !important;
-  backdrop-filter: blur(12px) !important;
-  -webkit-backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid var(--vela-stone-light) !important;
-  box-shadow: none !important;
-  transition: var(--vela-transition);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  background-color: rgba(242, 232, 247, 0.92) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(193, 144, 208, 0.25) !important;
+  box-shadow: 0 1px 0 rgba(193, 144, 208, 0.15) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
 }
 
 .header {
-  padding-top: 1.4rem !important;
-  padding-bottom: 1.4rem !important;
+  padding-block: 1.4rem !important;
 }
 
-/* Logo / brand name in header */
 .header__heading-link,
 .header__heading {
   font-family: var(--vela-font-heading) !important;
-  font-size: 1.9rem !important;
+  font-size: 2rem !important;
   font-weight: 400 !important;
-  letter-spacing: 0.22em !important;
+  letter-spacing: 0.26em !important;
   text-transform: uppercase !important;
-  color: var(--vela-charcoal) !important;
+  color: var(--vela-black) !important;
   text-decoration: none !important;
+  transition: var(--vela-transition-fast);
 }
 
 .header__heading-link:hover {
   color: var(--vela-lavender-deep) !important;
-  transition: var(--vela-transition-fast);
 }
 
-/* Nav links */
-.header__menu-item,
-.header__menu-item span,
-.list-menu__item,
-.header__active-menu-item {
-  font-family: var(--vela-font-body) !important;
-  font-size: 0.78rem !important;
-  font-weight: 400 !important;
-  letter-spacing: 0.12em !important;
-  text-transform: uppercase !important;
-  color: var(--vela-charcoal) !important;
-  transition: var(--vela-transition-fast);
-}
-
-.header__menu-item:hover span,
-.list-menu__item:hover {
-  color: var(--vela-lavender-deep) !important;
-}
-
-/* Underline indicator on active nav item */
-.header__active-menu-item span::after,
-.header__menu-item:hover span::after {
-  background-color: var(--vela-lavender) !important;
-}
-
-/* Cart icon count bubble */
-.cart-count-bubble {
-  background-color: var(--vela-lavender) !important;
-  color: var(--vela-white) !important;
-}
-
-/* ─── 5. Announcement Bar ───────────────────────────────────── */
-.announcement-bar {
-  background-color: var(--vela-lavender-deep) !important;
-  color: var(--vela-white) !important;
+.header__menu-item > span,
+.header__menu-item > a,
+.list-menu__item {
   font-family: var(--vela-font-body) !important;
   font-size: 0.72rem !important;
   font-weight: 400 !important;
   letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
+  color: var(--vela-charcoal) !important;
+  transition: var(--vela-transition-fast);
+}
+
+.header__menu-item:hover > span,
+.header__menu-item:hover > a {
+  color: var(--vela-lavender-deep) !important;
+}
+
+.header__icon {
+  color: var(--vela-charcoal) !important;
+  transition: var(--vela-transition-fast);
+}
+
+.header__icon:hover {
+  color: var(--vela-lavender-deep) !important;
+}
+
+.cart-count-bubble {
+  background-color: var(--vela-black) !important;
+  color: var(--vela-white) !important;
+  font-family: var(--vela-font-body) !important;
+  font-size: 0.58rem !important;
+  font-weight: 700 !important;
+}
+
+/* ─── 5. Announcement Bar ───────────────────────────────────── */
+.announcement-bar {
+  background: linear-gradient(90deg, var(--vela-lavender-deep) 0%, var(--vela-lavender-richer) 100%) !important;
+  color: var(--vela-white) !important;
+  font-family: var(--vela-font-body) !important;
+  font-size: 0.7rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
   padding: 10px 0 !important;
 }
 
-.announcement-bar a {
-  color: var(--vela-lavender-soft) !important;
+.announcement-bar a,
+.announcement-bar__link {
+  color: rgba(255, 255, 255, 0.75) !important;
 }
 
-/* ─── 6. Hero / Image Banner ────────────────────────────────── */
-.banner {
-  background-color: var(--vela-cream-dark);
-}
+/* ─── 6. Buttons ────────────────────────────────────────────── */
 
-.banner__media img {
-  object-fit: cover;
-  object-position: center;
-}
-
-.banner__box {
-  background: rgba(250, 248, 245, 0.88) !important;
-  backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(193, 144, 208, 0.2) !important;
-  border-radius: var(--vela-radius-lg) !important;
-  box-shadow: var(--vela-shadow-md) !important;
-  padding: 3.6rem 4rem !important;
-}
-
-.banner__heading {
-  font-family: var(--vela-font-heading) !important;
-  font-weight: 300 !important;
-  color: var(--vela-charcoal) !important;
-}
-
-/* ─── 7. Buttons ────────────────────────────────────────────── */
-
-/* Primary button */
+/* Primary — black pill */
 .button,
-.button--primary,
-button[type="submit"],
-.shopify-payment-button__button--unbranded {
+.button--primary {
   font-family: var(--vela-font-body) !important;
-  font-size: 0.72rem !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.16em !important;
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
-  background-color: var(--vela-charcoal) !important;
-  color: var(--vela-cream) !important;
-  border: 1.5px solid var(--vela-charcoal) !important;
+  background-color: var(--vela-black) !important;
+  color: var(--vela-white) !important;
+  border: 2px solid var(--vela-black) !important;
   border-radius: var(--vela-radius-pill) !important;
-  padding: 1rem 2.4rem !important;
+  padding: 1rem 2.6rem !important;
   transition: var(--vela-transition) !important;
   cursor: pointer;
 }
 
 .button:hover,
-.button--primary:hover,
-button[type="submit"]:hover {
+.button--primary:hover {
   background-color: var(--vela-lavender-deep) !important;
   border-color: var(--vela-lavender-deep) !important;
   color: var(--vela-white) !important;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(122, 74, 154, 0.28) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(122, 74, 154, 0.3) !important;
 }
 
-/* Secondary / outline button */
+/* Secondary — outline */
 .button--secondary {
   background-color: transparent !important;
-  color: var(--vela-charcoal) !important;
-  border: 1.5px solid var(--vela-charcoal) !important;
+  color: var(--vela-black) !important;
+  border: 2px solid var(--vela-black) !important;
   border-radius: var(--vela-radius-pill) !important;
 }
 
 .button--secondary:hover {
-  background-color: var(--vela-charcoal) !important;
-  color: var(--vela-cream) !important;
+  background-color: var(--vela-black) !important;
+  color: var(--vela-white) !important;
 }
 
-/* Add to cart specific */
+/* Ghost — white outline for use on dark/lavender backgrounds */
+.button--ghost {
+  background-color: transparent !important;
+  color: var(--vela-white) !important;
+  border: 2px solid rgba(255, 255, 255, 0.6) !important;
+  border-radius: var(--vela-radius-pill) !important;
+}
+
+.button--ghost:hover {
+  background-color: var(--vela-white) !important;
+  color: var(--vela-black) !important;
+  border-color: var(--vela-white) !important;
+}
+
+/* Add to cart */
 .product-form__submit {
   font-family: var(--vela-font-body) !important;
-  font-size: 0.75rem !important;
-  letter-spacing: 0.16em !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
-  background-color: var(--vela-lavender-deep) !important;
+  background-color: var(--vela-black) !important;
   color: var(--vela-white) !important;
   border: none !important;
   border-radius: var(--vela-radius-pill) !important;
-  padding: 1.1rem 2.8rem !important;
+  padding: 1.15rem 2.8rem !important;
+  width: 100% !important;
   transition: var(--vela-transition) !important;
 }
 
-.product-form__submit:hover {
-  background-color: var(--vela-charcoal) !important;
-  transform: translateY(-1px);
-  box-shadow: var(--vela-shadow-md) !important;
+.product-form__submit:hover:not([disabled]) {
+  background-color: var(--vela-lavender-deep) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 32px rgba(122, 74, 154, 0.3) !important;
 }
 
-/* ─── 8. Product Cards ──────────────────────────────────────── */
+.product-form__submit[disabled] {
+  opacity: 0.4 !important;
+}
+
+/* Shopify dynamic payment */
+.shopify-payment-button__button {
+  border-radius: var(--vela-radius-pill) !important;
+  font-family: var(--vela-font-body) !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.12em !important;
+}
+
+/* ─── 7. Product Cards ──────────────────────────────────────── */
 .card-wrapper,
 .product-card-wrapper {
   transition: var(--vela-transition);
@@ -265,42 +278,41 @@ button[type="submit"]:hover {
 
 .card-wrapper:hover,
 .product-card-wrapper:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
 }
 
 .card {
   background-color: var(--vela-white) !important;
-  border: 1px solid var(--vela-stone-light) !important;
-  border-radius: var(--vela-radius-lg) !important;
+  border: 1px solid rgba(193, 144, 208, 0.2) !important;
+  border-radius: var(--vela-radius-xl) !important;
   overflow: hidden;
-  box-shadow: var(--vela-shadow-soft) !important;
+  box-shadow: var(--vela-shadow-card) !important;
   transition: var(--vela-transition) !important;
 }
 
 .card:hover {
-  box-shadow: var(--vela-shadow-product) !important;
-  border-color: rgba(193, 144, 208, 0.4) !important;
+  box-shadow: var(--vela-shadow-hover) !important;
+  border-color: rgba(193, 144, 208, 0.5) !important;
 }
 
-/* Card image container */
 .card__media,
 .card--media .card__inner {
-  background-color: var(--vela-cream-dark) !important;
-  border-radius: var(--vela-radius-lg) var(--vela-radius-lg) 0 0 !important;
+  background-color: var(--vela-lavender-pale) !important;
+  border-radius: var(--vela-radius-xl) var(--vela-radius-xl) 0 0 !important;
+  overflow: hidden;
 }
 
-/* Card content */
 .card__content,
 .card__information {
-  padding: 1.4rem 1.6rem 1.8rem !important;
+  padding: 1.6rem 1.8rem 2rem !important;
 }
 
 .card__heading,
 .card__heading a {
   font-family: var(--vela-font-heading) !important;
-  font-size: 1.3rem !important;
+  font-size: 1.4rem !important;
   font-weight: 400 !important;
-  color: var(--vela-charcoal) !important;
+  color: var(--vela-black) !important;
   text-decoration: none !important;
   letter-spacing: -0.01em;
   transition: var(--vela-transition-fast);
@@ -310,12 +322,11 @@ button[type="submit"]:hover {
   color: var(--vela-lavender-deep) !important;
 }
 
-/* Price */
 .price,
 .price__regular,
 .price-item--regular {
   font-family: var(--vela-font-body) !important;
-  font-size: 0.9rem !important;
+  font-size: 0.92rem !important;
   font-weight: 500 !important;
   color: var(--vela-charcoal) !important;
 }
@@ -324,153 +335,234 @@ button[type="submit"]:hover {
   color: var(--vela-lavender-deep) !important;
 }
 
-/* ─── 9. Product Page ───────────────────────────────────────── */
+/* ─── 8. Product Page ───────────────────────────────────────── */
+.product {
+  padding-top: 3rem !important;
+  padding-bottom: 6rem !important;
+}
+
+@media (min-width: 990px) {
+  .product__info-wrapper {
+    position: sticky !important;
+    top: 6rem !important;
+    align-self: start !important;
+  }
+}
+
 .product__title {
   font-family: var(--vela-font-heading) !important;
-  font-size: clamp(2.2rem, 5vw, 3.8rem) !important;
+  font-size: clamp(2.4rem, 5vw, 4.2rem) !important;
   font-weight: 300 !important;
-  letter-spacing: -0.015em !important;
-  color: var(--vela-charcoal) !important;
-  line-height: 1.1 !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--vela-black) !important;
 }
 
 .product__vendor {
   font-family: var(--vela-font-body) !important;
-  font-size: 0.68rem !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.2em !important;
+  font-size: 0.66rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.24em !important;
   text-transform: uppercase !important;
   color: var(--vela-lavender-deep) !important;
-  margin-bottom: 0.5rem !important;
 }
 
 .product__description {
   font-family: var(--vela-font-body) !important;
-  font-size: 0.95rem !important;
-  line-height: 1.75 !important;
+  font-size: 0.94rem !important;
+  line-height: 1.78 !important;
   color: var(--vela-stone) !important;
 }
 
-/* Product media */
-.product__media-wrapper {
-  background-color: var(--vela-cream-dark) !important;
-  border-radius: var(--vela-radius-lg) !important;
+.product__media {
+  border-radius: var(--vela-radius-xl) !important;
   overflow: hidden;
+  background-color: var(--vela-lavender-pale) !important;
 }
 
-/* Variant selectors */
-.variant-selects,
-.product-form__input {
-  margin-bottom: 1.6rem !important;
-}
-
-.product-form__input label,
-.variant-selects label {
+/* Variant labels */
+.product-form__input .form__label {
   font-family: var(--vela-font-body) !important;
-  font-size: 0.72rem !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.12em !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
-  color: var(--vela-charcoal) !important;
-  margin-bottom: 0.6rem !important;
-  display: block !important;
+  color: var(--vela-black) !important;
 }
 
-/* Swatch variant buttons */
-.swatch-input__input:checked + .swatch-input__display,
-.color-swatch--active {
-  border-color: var(--vela-lavender-deep) !important;
-  box-shadow: 0 0 0 2px var(--vela-lavender) !important;
-}
-
-/* Quantity selector */
-.quantity {
-  border: 1px solid var(--vela-stone-light) !important;
+/* Pill variant selectors */
+.swatch-input__display {
+  font-family: var(--vela-font-body) !important;
+  font-size: 0.8rem !important;
+  border: 1.5px solid var(--vela-stone-light) !important;
   border-radius: var(--vela-radius-pill) !important;
-  background-color: var(--vela-white) !important;
-  overflow: hidden;
+  padding: 0.45rem 1.2rem !important;
+  color: var(--vela-charcoal) !important;
+  background: var(--vela-white) !important;
+  cursor: pointer !important;
+  transition: var(--vela-transition-fast) !important;
 }
 
-.quantity__button {
-  color: var(--vela-charcoal) !important;
+.swatch-input__display:hover {
+  border-color: var(--vela-lavender) !important;
+}
+
+.swatch-input__input:checked + .swatch-input__display {
+  background-color: var(--vela-black) !important;
+  border-color: var(--vela-black) !important;
+  color: var(--vela-white) !important;
+}
+
+/* Quantity */
+.quantity {
+  border: 1.5px solid var(--vela-stone-light) !important;
+  border-radius: var(--vela-radius-pill) !important;
+  background: var(--vela-white) !important;
+}
+
+.quantity__button,
+.quantity__input {
+  font-family: var(--vela-font-body) !important;
+  color: var(--vela-black) !important;
   background: transparent !important;
 }
 
-.quantity__input {
+/* Product price */
+.product__price .price-item--regular {
   font-family: var(--vela-font-body) !important;
-  color: var(--vela-charcoal) !important;
+  font-size: 1.5rem !important;
+  font-weight: 400 !important;
+  color: var(--vela-black) !important;
 }
 
-/* ─── 10. Collections / Grid ────────────────────────────────── */
-.collection-hero__title {
-  font-family: var(--vela-font-heading) !important;
-  font-weight: 300 !important;
-  color: var(--vela-charcoal) !important;
-}
-
-.facets__summary,
-.mobile-facets__summary {
+/* ─── 9. Badges ─────────────────────────────────────────────── */
+.badge {
   font-family: var(--vela-font-body) !important;
-  font-size: 0.75rem !important;
-  letter-spacing: 0.1em !important;
+  font-size: 0.6rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
   text-transform: uppercase !important;
-  color: var(--vela-charcoal) !important;
+  border-radius: var(--vela-radius-pill) !important;
+  padding: 0.3rem 0.8rem !important;
 }
 
-/* ─── 11. Cart ──────────────────────────────────────────────── */
+.badge--sale {
+  background-color: var(--vela-black) !important;
+  color: var(--vela-white) !important;
+  border: none !important;
+}
+
+.badge--new {
+  background-color: var(--vela-lavender) !important;
+  color: var(--vela-white) !important;
+  border: none !important;
+}
+
+/* ─── 10. Form Inputs ───────────────────────────────────────── */
+.field__input,
+.select__select,
+textarea,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"] {
+  font-family: var(--vela-font-body) !important;
+  font-size: 0.9rem !important;
+  color: var(--vela-black) !important;
+  background-color: var(--vela-white) !important;
+  border: 1.5px solid var(--vela-stone-light) !important;
+  border-radius: var(--vela-radius-md) !important;
+  padding: 0.9rem 1.2rem !important;
+  transition: var(--vela-transition-fast);
+}
+
+.field__input:focus,
+input:focus,
+textarea:focus {
+  border-color: var(--vela-lavender) !important;
+  box-shadow: 0 0 0 3px rgba(193, 144, 208, 0.2) !important;
+  outline: none !important;
+}
+
+.field__label {
+  font-family: var(--vela-font-body) !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--vela-stone) !important;
+}
+
+/* ─── 11. Cart Drawer ───────────────────────────────────────── */
 .cart-drawer {
-  background-color: var(--vela-cream) !important;
+  background-color: var(--vela-off-white) !important;
   border-left: 1px solid var(--vela-stone-light) !important;
 }
 
 .cart-drawer__header {
   border-bottom: 1px solid var(--vela-stone-light) !important;
+  padding: 2rem !important;
 }
 
 .cart-drawer__heading {
   font-family: var(--vela-font-heading) !important;
-  font-size: 1.8rem !important;
-  font-weight: 400 !important;
-  color: var(--vela-charcoal) !important;
-  letter-spacing: 0.02em !important;
+  font-size: 2rem !important;
+  font-weight: 300 !important;
+  color: var(--vela-black) !important;
+  letter-spacing: 0.03em !important;
 }
 
 .cart-item__name {
   font-family: var(--vela-font-body) !important;
   font-weight: 500 !important;
-  color: var(--vela-charcoal) !important;
+  color: var(--vela-black) !important;
 }
 
-.totals__total,
+.cart-item {
+  border-bottom: 1px solid var(--vela-stone-light) !important;
+}
+
 .totals__subtotal {
   font-family: var(--vela-font-body) !important;
-  color: var(--vela-charcoal) !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--vela-stone) !important;
+}
+
+.totals__subtotal-value {
+  font-family: var(--vela-font-heading) !important;
+  font-size: 1.6rem !important;
+  font-weight: 400 !important;
+  color: var(--vela-black) !important;
 }
 
 /* ─── 12. Footer ────────────────────────────────────────────── */
-.footer {
-  background-color: var(--vela-charcoal) !important;
-  color: var(--vela-stone-light) !important;
+.footer,
+.footer-section {
+  background-color: var(--vela-black) !important;
+  color: rgba(255, 255, 255, 0.6) !important;
   padding-top: 5rem !important;
   padding-bottom: 3rem !important;
 }
 
-.footer__heading {
+.footer__heading,
+.footer-block__heading {
   font-family: var(--vela-font-heading) !important;
-  font-size: 1.2rem !important;
+  font-size: 1.1rem !important;
   font-weight: 400 !important;
   color: var(--vela-white) !important;
-  letter-spacing: 0.04em !important;
-  margin-bottom: 1.2rem !important;
+  letter-spacing: 0.06em !important;
+  margin-bottom: 1.4rem !important;
 }
 
 .footer__list a,
 .footer-block__link {
   font-family: var(--vela-font-body) !important;
   font-size: 0.82rem !important;
-  color: var(--vela-stone-light) !important;
+  color: rgba(255, 255, 255, 0.55) !important;
   text-decoration: none !important;
-  letter-spacing: 0.06em !important;
+  letter-spacing: 0.05em !important;
   transition: var(--vela-transition-fast);
 }
 
@@ -479,293 +571,116 @@ button[type="submit"]:hover {
   color: var(--vela-lavender) !important;
 }
 
-.footer__copyright {
+.footer__copyright,
+.copyright__content {
   font-family: var(--vela-font-body) !important;
-  font-size: 0.72rem !important;
-  color: var(--vela-stone) !important;
+  font-size: 0.7rem !important;
+  color: rgba(255, 255, 255, 0.3) !important;
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-  padding-top: 2rem !important;
+  padding-top: 2.4rem !important;
   margin-top: 4rem !important;
-  letter-spacing: 0.08em !important;
+  letter-spacing: 0.1em !important;
 }
 
-/* Footer brand name */
-.footer__brand-name,
-.footer__logo-link {
-  font-family: var(--vela-font-heading) !important;
-  font-size: 2rem !important;
-  font-weight: 400 !important;
-  letter-spacing: 0.22em !important;
-  text-transform: uppercase !important;
-  color: var(--vela-white) !important;
-  text-decoration: none !important;
+.list-social__link {
+  color: rgba(255, 255, 255, 0.4) !important;
+  transition: var(--vela-transition-fast) !important;
 }
 
-/* ─── 13. Rich Text / Content Sections ─────────────────────── */
-.rich-text__heading {
-  font-family: var(--vela-font-heading) !important;
-  font-weight: 300 !important;
-  color: var(--vela-charcoal) !important;
+.list-social__link:hover {
+  color: var(--vela-lavender) !important;
 }
 
-.rich-text__text {
-  font-family: var(--vela-font-body) !important;
-  color: var(--vela-stone) !important;
-  line-height: 1.78 !important;
-}
-
-/* ─── 14. Image with Text Sections ─────────────────────────── */
-.image-with-text__content {
-  padding: 3rem 4rem !important;
-}
-
-.image-with-text__heading {
-  font-family: var(--vela-font-heading) !important;
-  font-weight: 300 !important;
-  line-height: 1.1 !important;
-}
-
-/* ─── 15. Featured Collection Section ──────────────────────── */
-.featured-collection .title-wrapper .title {
-  font-family: var(--vela-font-heading) !important;
-  font-weight: 300 !important;
-  color: var(--vela-charcoal) !important;
-}
-
-/* ─── 16. Newsletter Section ────────────────────────────────── */
-.newsletter {
-  background-color: var(--vela-lavender-soft) !important;
-  border-radius: var(--vela-radius-lg) !important;
-}
-
-.newsletter__heading {
-  font-family: var(--vela-font-heading) !important;
-  font-weight: 300 !important;
-  color: var(--vela-charcoal) !important;
-}
-
+/* ─── 13. Newsletter ────────────────────────────────────────── */
 .newsletter-form__field-wrapper input {
-  border: 1.5px solid var(--vela-lavender) !important;
+  border: 1.5px solid var(--vela-stone-light) !important;
   border-radius: var(--vela-radius-pill) !important;
   background: var(--vela-white) !important;
   font-family: var(--vela-font-body) !important;
-  padding: 0.9rem 1.4rem !important;
 }
 
 .newsletter-form__field-wrapper input:focus {
-  outline: none !important;
-  border-color: var(--vela-lavender-deep) !important;
-  box-shadow: 0 0 0 3px rgba(193, 144, 208, 0.2) !important;
-}
-
-/* ─── 17. Badges / Tags ─────────────────────────────────────── */
-.badge {
-  font-family: var(--vela-font-body) !important;
-  font-size: 0.62rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.1em !important;
-  text-transform: uppercase !important;
-  border-radius: var(--vela-radius-pill) !important;
-  padding: 0.25rem 0.75rem !important;
-}
-
-.badge--sale {
-  background-color: var(--vela-lavender) !important;
-  color: var(--vela-white) !important;
-  border: none !important;
-}
-
-.badge--new {
-  background-color: var(--vela-amber) !important;
-  color: var(--vela-white) !important;
-  border: none !important;
-}
-
-/* ─── 18. Form Inputs (global) ──────────────────────────────── */
-.field__input,
-.select__select,
-textarea,
-select,
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-input[type="tel"] {
-  font-family: var(--vela-font-body) !important;
-  font-size: 0.9rem !important;
-  color: var(--vela-charcoal) !important;
-  background-color: var(--vela-white) !important;
-  border: 1.5px solid var(--vela-stone-light) !important;
-  border-radius: var(--vela-radius-md) !important;
-  padding: 0.85rem 1.1rem !important;
-  transition: var(--vela-transition-fast);
-}
-
-.field__input:focus,
-.select__select:focus,
-textarea:focus,
-input:focus {
   border-color: var(--vela-lavender) !important;
-  box-shadow: 0 0 0 3px rgba(193, 144, 208, 0.18) !important;
+  box-shadow: 0 0 0 3px rgba(193, 144, 208, 0.2) !important;
   outline: none !important;
 }
 
-.field__label {
-  font-family: var(--vela-font-body) !important;
-  font-size: 0.72rem !important;
-  letter-spacing: 0.1em !important;
-  text-transform: uppercase !important;
-  color: var(--vela-stone) !important;
+/* ─── 14. Predictive Search ─────────────────────────────────── */
+.predictive-search {
+  background: var(--vela-white) !important;
+  border: 1px solid var(--vela-stone-light) !important;
+  border-radius: var(--vela-radius-lg) !important;
+  box-shadow: var(--vela-shadow-md) !important;
 }
 
-/* ─── 19. Breadcrumbs / Pagination ─────────────────────────── */
-.breadcrumb {
-  font-family: var(--vela-font-body) !important;
-  font-size: 0.75rem !important;
-  letter-spacing: 0.08em !important;
-  color: var(--vela-stone) !important;
-}
-
+/* ─── 15. Pagination ────────────────────────────────────────── */
 .pagination__item.is-active,
 .pagination .current {
-  background-color: var(--vela-lavender-deep) !important;
+  background-color: var(--vela-black) !important;
   color: var(--vela-white) !important;
-  border-color: var(--vela-lavender-deep) !important;
+  border-color: var(--vela-black) !important;
   border-radius: var(--vela-radius-sm) !important;
 }
 
-/* ─── 20. Scrollbar Styling ─────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--vela-cream);
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--vela-lavender);
-  border-radius: 10px;
-}
-
-/* ─── 21. Selection Color ───────────────────────────────────── */
-::selection {
-  background-color: var(--vela-lavender-soft);
-  color: var(--vela-charcoal);
-}
-
-/* ─── 22. Focus Ring (accessibility) ───────────────────────── */
-:focus-visible {
-  outline: 2px solid var(--vela-lavender) !important;
-  outline-offset: 3px !important;
-}
-
-/* ─── 23. Page Width / Section Spacing ─────────────────────── */
-.section-full-width,
-.shopify-section {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-}
-
-@media (max-width: 768px) {
-  .shopify-section {
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
-  }
-}
-
-/* ─── 24. Smooth Page Transitions ──────────────────────────── */
-html {
-  scroll-behavior: smooth;
-}
-
-/* ─── 25. Multicolumn / Feature Blocks ─────────────────────── */
-.multicolumn-card {
-  background-color: var(--vela-white) !important;
-  border: 1px solid var(--vela-stone-light) !important;
-  border-radius: var(--vela-radius-lg) !important;
-  padding: 2.4rem 2rem !important;
-  box-shadow: var(--vela-shadow-soft) !important;
-  transition: var(--vela-transition);
-}
-
-.multicolumn-card:hover {
-  box-shadow: var(--vela-shadow-md) !important;
-  border-color: rgba(193, 144, 208, 0.35) !important;
-  transform: translateY(-3px);
-}
-
-.multicolumn-card__title {
-  font-family: var(--vela-font-heading) !important;
-  font-size: 1.4rem !important;
-  font-weight: 400 !important;
-  color: var(--vela-charcoal) !important;
-}
-
-/* ─── 26. Collapsible / Accordion (FAQ) ─────────────────────── */
+/* ─── 16. Accordion / FAQ ───────────────────────────────────── */
 .accordion {
   border-bottom: 1px solid var(--vela-stone-light) !important;
 }
 
 .accordion__title {
   font-family: var(--vela-font-body) !important;
-  font-size: 0.88rem !important;
+  font-size: 0.9rem !important;
   font-weight: 500 !important;
-  letter-spacing: 0.04em !important;
-  color: var(--vela-charcoal) !important;
-  padding: 1.4rem 0 !important;
+  color: var(--vela-black) !important;
+  padding: 1.5rem 0 !important;
 }
 
 .accordion__content {
   font-family: var(--vela-font-body) !important;
   color: var(--vela-stone) !important;
-  line-height: 1.75 !important;
+  line-height: 1.76 !important;
 }
 
-/* ─── 27. Mobile Menu Drawer ────────────────────────────────── */
+/* ─── 17. Mobile Drawer ─────────────────────────────────────── */
 .menu-drawer {
-  background-color: var(--vela-cream) !important;
-}
-
-.menu-drawer__navigation-heading {
-  font-family: var(--vela-font-heading) !important;
-  font-weight: 400 !important;
-  letter-spacing: 0.12em !important;
+  background-color: var(--vela-lavender-pale) !important;
 }
 
 .menu-drawer__menu-item,
 .menu-drawer__menu-item span {
   font-family: var(--vela-font-body) !important;
   font-size: 0.82rem !important;
-  letter-spacing: 0.12em !important;
+  letter-spacing: 0.14em !important;
   text-transform: uppercase !important;
-  color: var(--vela-charcoal) !important;
+  color: var(--vela-black) !important;
 }
 
-/* ─── 28. Related / Complementary Products ─────────────────── */
-.complementary-products,
-.related-products {
-  background-color: var(--vela-cream-dark) !important;
-  border-radius: var(--vela-radius-lg) !important;
-  padding: 2rem !important;
+/* ─── 18. Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--vela-lavender-light); }
+::-webkit-scrollbar-thumb {
+  background-color: var(--vela-lavender);
+  border-radius: 10px;
 }
 
-/* ─── 29. Loading / Skeleton States ─────────────────────────── */
-.skeleton-loader {
-  background: linear-gradient(90deg, var(--vela-cream-dark) 25%, var(--vela-cream) 50%, var(--vela-cream-dark) 75%);
-  background-size: 200% 100%;
-  animation: vela-shimmer 1.5s infinite;
+/* ─── 19. Selection ─────────────────────────────────────────── */
+::selection {
+  background-color: var(--vela-lavender-mid);
+  color: var(--vela-black);
 }
 
-@keyframes vela-shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+/* ─── 20. Focus Ring ────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--vela-lavender) !important;
+  outline-offset: 3px !important;
 }
 
-/* ─── 30. Utility Classes ───────────────────────────────────── */
-.vela-text-lavender    { color: var(--vela-lavender-deep) !important; }
-.vela-text-amber       { color: var(--vela-amber) !important; }
-.vela-bg-cream         { background-color: var(--vela-cream) !important; }
-.vela-bg-lavender-soft { background-color: var(--vela-lavender-soft) !important; }
-.vela-serif            { font-family: var(--vela-font-heading) !important; }
-.vela-sans             { font-family: var(--vela-font-body) !important; }
+/* ─── 21. Utilities ─────────────────────────────────────────── */
+.vela-text-white    { color: var(--vela-white) !important; }
+.vela-text-lavender { color: var(--vela-lavender) !important; }
+.vela-text-deep     { color: var(--vela-lavender-deep) !important; }
+.vela-bg-lavender   { background-color: var(--vela-lavender) !important; }
+.vela-bg-black      { background-color: var(--vela-black) !important; }
+.vela-bg-pale       { background-color: var(--vela-lavender-pale) !important; }
+.vela-serif         { font-family: var(--vela-font-heading) !important; }
+.vela-sans          { font-family: var(--vela-font-body) !important; }

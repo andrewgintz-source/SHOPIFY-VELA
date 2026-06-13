@@ -1,0 +1,158 @@
+{{ 'vela-sections.css' | asset_url | stylesheet_tag }}
+
+<section class="vela-testimonials" id="vela-testimonials-{{ section.id }}">
+  <div class="page-width">
+
+    <div class="vela-testimonials__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="vela-testimonials__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="vela-testimonials__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="vela-testimonials__grid">
+      {%- for block in section.blocks -%}
+        <div class="vela-testimonial-card" {{ block.shopify_attributes }}>
+
+          <!-- Stars -->
+          <div class="vela-testimonial-card__stars">
+            {%- for i in (1..block.settings.rating) -%}
+              <svg class="vela-testimonial-card__star" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/>
+              </svg>
+            {%- endfor -%}
+          </div>
+
+          <!-- Quote -->
+          <p class="vela-testimonial-card__quote">
+            &ldquo;{{ block.settings.quote }}&rdquo;
+          </p>
+
+          <!-- Author -->
+          <div class="vela-testimonial-card__author">
+            <div>
+              <div class="vela-testimonial-card__author-name">{{ block.settings.author }}</div>
+              {%- if block.settings.product_name != blank -%}
+                <div class="vela-testimonial-card__author-product">{{ block.settings.product_name }}</div>
+              {%- endif -%}
+              {%- if block.settings.verified -%}
+                <div class="vela-testimonial-card__verified">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="5" cy="5" r="5" fill="rgba(255,255,255,0.3)"/>
+                    <path d="M3 5l1.5 1.5L7 3.5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Verified Purchase
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vela Testimonials",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "What customers say"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section heading",
+      "default": "Real results, real people"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "This product has completely changed my evening routine. I fall asleep faster and wake up feeling genuinely rested."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Customer name",
+          "default": "Sarah M."
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product purchased",
+          "default": "Reishi Calm Drops"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Show verified badge",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vela Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "I was skeptical at first, but after two weeks of taking Reishi Calm Drops every night, I genuinely feel more relaxed. My sleep quality has improved noticeably.",
+            "author": "Sarah M.",
+            "product_name": "Reishi Calm Drops",
+            "verified": true
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "The taste is subtle and earthy — nothing like I expected. It’s become a ritual I actually look forward to. My anxiety feels so much more manageable.",
+            "author": "James T.",
+            "product_name": "Reishi Calm Drops",
+            "verified": true
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Clean ingredients, beautiful packaging, and it actually works. Vela is exactly what I’ve been looking for in a wellness brand.",
+            "author": "Olivia R.",
+            "product_name": "Reishi Calm Drops",
+            "verified": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

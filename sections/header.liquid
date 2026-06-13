@@ -13,6 +13,73 @@
 
 
 <style>
+  /* ── Vela Header Overrides ── */
+  .header-wrapper {
+    background-color: rgba(250, 248, 245, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid #D6D0C8;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .header {
+    padding-block: 1.3rem;
+  }
+
+  /* Show logo text as VELA in the brand typeface */
+  .header__heading-link {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.85rem;
+    font-weight: 400;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #1A1714;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .header__heading-link:hover {
+    color: #7A4A9A;
+  }
+
+  /* Desktop nav items */
+  .header__menu-item > span,
+  .header__menu-item > a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.73rem;
+    font-weight: 400;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #1A1714;
+    transition: color 0.2s ease;
+  }
+
+  .header__menu-item:hover > span,
+  .header__menu-item:hover > a {
+    color: #7A4A9A;
+  }
+
+  /* Cart + search icon buttons */
+  .header__icon {
+    color: #1A1714;
+    transition: color 0.2s ease;
+  }
+
+  .header__icon:hover {
+    color: #7A4A9A;
+  }
+
+  /* Cart bubble */
+  .cart-count-bubble {
+    background-color: #C190D0;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 600;
+  }
+
   header-drawer {
     justify-self: start;
     margin-left: -1.2rem;

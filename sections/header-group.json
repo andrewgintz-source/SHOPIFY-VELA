@@ -58,6 +58,7 @@
     },
     "vela_hero_d6Tmjf": {
       "type": "vela-hero",
+      "disabled": true,
       "name": "Vela Hero",
       "settings": {
         "eyebrow": "Introducing Vela",

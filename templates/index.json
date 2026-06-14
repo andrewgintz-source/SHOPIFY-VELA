@@ -9,6 +9,21 @@
  */
 {
   "sections": {
+    "vela_hero_P3hgqt": {
+      "type": "vela-hero",
+      "name": "Vela Hero",
+      "settings": {
+        "eyebrow": "Introducing Vela",
+        "headline": "Modern life is relentless. Your body remembers.",
+        "description": "Reishi Calm Drops — a daily adaptogen tincture crafted to quiet the noise.",
+        "cta_url": "",
+        "cta_text": "Shop Reishi Calm Drops",
+        "secondary_url": "",
+        "secondary_text": "Learn more",
+        "review_count": 2847,
+        "product_image": "shopify://shop_images/F7A58D0B-3BE4-44D3-BDB5-47BB500042D4.png"
+      }
+    },
     "vela_pain_point_MGdNtV": {
       "type": "vela-pain-point",
       "blocks": {
@@ -52,6 +67,13 @@
     "vela_benefits_bkLz3M": {
       "type": "vela-benefits",
       "blocks": {
+        "benefit_j9JGzb": {
+          "type": "benefit",
+          "settings": {
+            "title": "Clinically studied Reishi mushroom",
+            "description": "Adaptogenic compounds that help your body regulate its stress response naturally."
+          }
+        },
         "benefit_UUdHwy": {
           "type": "benefit",
           "settings": {
@@ -82,6 +104,7 @@
         }
       },
       "block_order": [
+        "benefit_j9JGzb",
         "benefit_UUdHwy",
         "benefit_6LLhQF",
         "benefit_Q4rTaG",
@@ -218,6 +241,7 @@
     }
   },
   "order": [
+    "vela_hero_P3hgqt",
     "vela_pain_point_MGdNtV",
     "vela_benefits_bkLz3M",
     "vela_testimonials_KAPNVL",

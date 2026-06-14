@@ -1,415 +1,226 @@
-{% comment %}
-  VELA — Full Conversion Landing Page
-  Sections: Hero → Pain Point → Solution → How It Works
-            → Ingredients → Testimonials → FAQ → CTA
-{% endcomment %}
+{% comment %}VELA — Full Funnel Landing Page{% endcomment %}
 
-{{ 'vela-landing.css' | asset_url | stylesheet_tag }}
+<style>
+  #vlp-{{ section.id }} {
+    font-family:'DM Sans',system-ui,sans-serif;
+    color:#1E1A22;overflow-x:hidden;
+    --lp-lav:#C190D0;--lp-deep:#7A4A9A;--lp-black:#0A0810;--lp-white:#fff;
+    --ease:cubic-bezier(0.22,1,0.36,1);
+  }
+  #vlp-{{ section.id }} .lp-reveal { opacity:0;transform:translateY(28px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease); }
+  #vlp-{{ section.id }} .lp-reveal.on { opacity:1;transform:none; }
+  #vlp-{{ section.id }} [data-d="1"]{transition-delay:0.08s}
+  #vlp-{{ section.id }} [data-d="2"]{transition-delay:0.16s}
+  #vlp-{{ section.id }} [data-d="3"]{transition-delay:0.24s}
+  /* HERO */
+  #vlp-hero-{{ section.id }} {
+    background:#0A0810;min-height:100svh;display:flex;align-items:center;
+    position:relative;overflow:hidden;
+  }
+  #vlp-{{ section.id }} .lp-orb {
+    position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;
+    animation:lp-drift 9s ease-in-out infinite;
+  }
+  #vlp-{{ section.id }} .lp-orb-a{width:500px;height:500px;background:rgba(193,144,208,0.16);top:-15%;left:-10%}
+  #vlp-{{ section.id }} .lp-orb-b{width:360px;height:360px;background:rgba(122,74,154,0.2);bottom:0;right:0;animation-delay:-4s}
+  @keyframes lp-drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-24px)}}
+  #vlp-{{ section.id }} .lp-hero-in {
+    position:relative;z-index:2;max-width:1300px;margin:0 auto;padding:6rem 5%;
+    display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:3rem;width:100%;box-sizing:border-box;
+  }
+  #vlp-{{ section.id }} .lp-h1 {
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:clamp(2.8rem,5vw,5.2rem);font-weight:300;line-height:1.04;
+    color:#fff;margin:0 0 1.4rem;max-width:13ch;
+  }
+  #vlp-{{ section.id }} .lp-h1 em{color:#C190D0;font-style:italic}
+  #vlp-{{ section.id }} .lp-hero-p{font-size:0.97rem;line-height:1.78;color:rgba(255,255,255,0.52);margin:0 0 2.2rem;max-width:42ch}
+  #vlp-{{ section.id }} .lp-btn {
+    display:inline-flex;align-items:center;gap:8px;
+    background:linear-gradient(135deg,#7A4A9A,#C190D0);
+    color:#fff;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+    text-decoration:none;padding:15px 32px;border-radius:100px;
+    box-shadow:0 8px 32px rgba(193,144,208,0.3);
+    transition:transform 0.2s,box-shadow 0.2s;
+  }
+  #vlp-{{ section.id }} .lp-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(193,144,208,0.45)}
+  #vlp-{{ section.id }} .lp-proof{display:flex;align-items:center;gap:10px;margin-top:1.8rem;font-size:0.75rem;color:rgba(255,255,255,0.38)}
+  #vlp-{{ section.id }} .lp-stars{color:#C190D0}
+  #vlp-{{ section.id }} .lp-hero-img{display:flex;justify-content:center;position:relative}
+  #vlp-{{ section.id }} .lp-hero-img img,.lp-hero-img svg{max-height:500px;width:100%;object-fit:contain;animation:lp-float 5s ease-in-out infinite}
+  #vlp-{{ section.id }} .lp-glow{position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(193,144,208,0.18),transparent 70%)}
+  @keyframes lp-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  /* PAIN */
+  #vlp-pain-{{ section.id }}{padding:7rem 5%;background:#fff;text-align:center}
+  #vlp-{{ section.id }} .lp-eyebrow{font-size:0.62rem;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:#7A4A9A;margin-bottom:1.2rem;display:block}
+  #vlp-{{ section.id }} .lp-h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:300;line-height:1.1;margin:0 auto 1.2rem;max-width:18ch}
+  #vlp-{{ section.id }} .lp-sub{font-size:0.96rem;line-height:1.76;color:#9B8FA3;max-width:52ch;margin:0 auto 3.5rem}
+  #vlp-{{ section.id }} .lp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+  #vlp-{{ section.id }} .lp-card{background:#FAF8FC;border-radius:16px;padding:2.2rem 1.8rem;text-align:left}
+  #vlp-{{ section.id }} .lp-card-icon{font-size:2rem;margin-bottom:1rem}
+  #vlp-{{ section.id }} .lp-card-h{font-weight:700;font-size:0.95rem;margin-bottom:0.5rem;color:#1E1A22}
+  #vlp-{{ section.id }} .lp-card-p{font-size:0.88rem;line-height:1.7;color:#9B8FA3}
+  /* SOLUTION */
+  #vlp-sol-{{ section.id }}{padding:7rem 5%;background:linear-gradient(150deg,#7A4A9A,#A568C0,#C190D0)}
+  #vlp-{{ section.id }} .lp-sol-in{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;margin:0 auto}
+  #vlp-{{ section.id }} .lp-sol-img{display:flex;justify-content:center}
+  #vlp-{{ section.id }} .lp-sol-img img,.lp-sol-img svg{max-height:460px;width:100%;object-fit:contain;border-radius:24px}
+  #vlp-{{ section.id }} .lp-check{display:flex;gap:12px;align-items:flex-start;margin-bottom:1.4rem}
+  #vlp-{{ section.id }} .lp-check-icon{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;font-size:0.75rem;margin-top:2px}
+  #vlp-{{ section.id }} .lp-check-t{font-weight:600;color:#fff;font-size:0.95rem;margin-bottom:0.2rem}
+  #vlp-{{ section.id }} .lp-check-p{font-size:0.85rem;color:rgba(255,255,255,0.65);line-height:1.6}
+  /* HOW */
+  #vlp-how-{{ section.id }}{padding:7rem 5%;background:#F9F6FC;text-align:center}
+  #vlp-{{ section.id }} .lp-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1000px;margin:2.5rem auto 0;position:relative}
+  #vlp-{{ section.id }} .lp-step{padding:2rem 1.5rem}
+  #vlp-{{ section.id }} .lp-step-num{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#7A4A9A,#C190D0);color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem}
+  #vlp-{{ section.id }} .lp-step-h{font-weight:700;font-size:0.95rem;margin-bottom:0.5rem;color:#1E1A22}
+  #vlp-{{ section.id }} .lp-step-p{font-size:0.88rem;line-height:1.7;color:#9B8FA3}
+  /* CTA */
+  #vlp-cta-{{ section.id }}{padding:7rem 5%;background:#0A0810;text-align:center;position:relative;overflow:hidden}
+  #vlp-{{ section.id }} .lp-cta-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+  #vlp-{{ section.id }} .lp-cta-orb-a{width:400px;height:400px;background:rgba(193,144,208,0.15);top:-20%;left:-10%}
+  #vlp-{{ section.id }} .lp-cta-orb-b{width:300px;height:300px;background:rgba(122,74,154,0.2);bottom:-10%;right:5%}
+  #vlp-{{ section.id }} .lp-cta-in{position:relative;z-index:2}
+  #vlp-{{ section.id }} .lp-cta-h{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.4rem,4.5vw,4rem);font-weight:300;color:#fff;margin:0 auto 1rem;max-width:20ch}
+  #vlp-{{ section.id }} .lp-cta-h em{color:#C190D0;font-style:italic}
+  #vlp-{{ section.id }} .lp-cta-p{font-size:0.97rem;color:rgba(255,255,255,0.5);margin:0 auto 2.5rem;max-width:50ch}
+  #vlp-{{ section.id }} .lp-trust{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1.8rem}
+  #vlp-{{ section.id }} .lp-trust-item{font-size:0.75rem;color:rgba(255,255,255,0.38);display:flex;align-items:center;gap:6px}
+  @media(max-width:768px){
+    #vlp-{{ section.id }} .lp-hero-in,#vlp-{{ section.id }} .lp-sol-in{grid-template-columns:1fr}
+    #vlp-{{ section.id }} .lp-hero-img,#vlp-{{ section.id }} .lp-sol-img{display:none}
+    #vlp-{{ section.id }} .lp-cards,#vlp-{{ section.id }} .lp-steps{grid-template-columns:1fr}
+    #vlp-{{ section.id }} .lp-trust{gap:1rem}
+  }
+</style>
 
-<div id="vlp-{{ section.id }}" class="vlp-root">
+<div id="vlp-{{ section.id }}">
 
-<!-- ═══════════ 1. HERO ═══════════ -->
+<!-- HERO -->
 <section id="vlp-hero-{{ section.id }}">
-  <div class="lp-orb lp-orb--a"></div>
-  <div class="lp-orb lp-orb--b"></div>
-  <div class="lp-orb lp-orb--c"></div>
-
-  <div class="lp-hero-inner">
-    <div class="lp-hero-content">
-
-      <div class="lp-hero-eyebrow">
-        <span class="lp-hero-dot"></span>
-        {{ section.settings.hero_eyebrow | default: 'Introducing Vela' }}
-      </div>
-
-      <h1 class="lp-hero-h1" id="vlp-h1-{{ section.id }}">
-        {{ section.settings.hero_headline | default: 'Modern life is relentless. Your body remembers.' }}
-      </h1>
-
-      <p class="lp-hero-sub">
-        Deadlines. Notifications. The constant noise. Your nervous system has been running on empty —
-        and it's <strong>paying the price.</strong>
-      </p>
-
-      <div class="lp-hero-line"></div>
-
-      <p class="lp-hero-desc">
-        {{ section.settings.hero_desc | default: 'Reishi Calm Drops is a daily adaptogen tincture crafted to quiet the noise — supporting your body\'s natural stress response so you can finally breathe again.' }}
-      </p>
-
-      <div class="lp-hero-proof">
-        <div class="lp-stars" aria-label="5 stars">
-          {%- for i in (1..5) -%}
-            <svg class="lp-star" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/>
-            </svg>
-          {%- endfor -%}
-        </div>
-        <span class="lp-proof-text">
-          <span class="lp-proof-count" data-count="{{ section.settings.review_count | default: 2847 }}">0</span> reviews
-        </span>
-        <div class="lp-proof-sep"></div>
-        <span class="lp-proof-pill">{{ section.settings.proof_badge | default: 'Natural formula' }}</span>
-      </div>
-
-      <div class="lp-hero-cta-row">
-        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="lp-btn lp-btn--white lp-btn--shimmer">
-          {{ section.settings.cta_text | default: 'Shop Reishi Calm Drops' }}
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M1 7h12M7.5 1.5L13 7l-5.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <a href="#vlp-how-{{ section.id }}" class="lp-hero-link">See how it works</a>
-      </div>
-
-    </div>
-
-    <div class="lp-hero-visual">
-      <div class="lp-hero-glow"></div>
-      <div class="lp-orbit lp-orbit--1"></div>
-      <div class="lp-orbit lp-orbit--2"></div>
-      <div class="lp-hero-product" id="vlp-product-{{ section.id }}">
-        {%- if section.settings.hero_image != blank -%}
-          {{ section.settings.hero_image | image_url: width: 600 | image_tag: loading: 'eager', fetchpriority: 'high', alt: 'Vela Reishi Calm Drops' }}
-        {%- else -%}
-          {{ 'product-1' | placeholder_svg_tag }}
-        {%- endif -%}
-      </div>
-      <div class="lp-hero-badge lp-hero-badge--1">
-        <span class="lp-badge-label">Serving size</span>
-        <span class="lp-badge-val">1ml <span>/ daily</span></span>
-      </div>
-      <div class="lp-hero-badge lp-hero-badge--2">
-        <span class="lp-badge-label">Key ingredient</span>
-        <span class="lp-badge-val">Reishi <span>extract</span></span>
+  <div class="lp-orb lp-orb-a" aria-hidden="true"></div>
+  <div class="lp-orb lp-orb-b" aria-hidden="true"></div>
+  <div class="lp-hero-in">
+    <div>
+      <span class="lp-eyebrow lp-reveal">{{ section.settings.hero_eyebrow | default: 'Introducing Vela' }}</span>
+      <h1 class="lp-h1 lp-reveal" data-d="1">{{ section.settings.hero_headline | default: 'Modern life is relentless. Your body <em>remembers.</em>' }}</h1>
+      <p class="lp-hero-p lp-reveal" data-d="2">{{ section.settings.hero_desc | default: 'Reishi Calm Drops is a daily adaptogen tincture crafted to quiet the noise — supporting your body\'s natural stress response.' }}</p>
+      <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="lp-btn lp-reveal" data-d="3">
+        {{ section.settings.cta_text | default: 'Shop Reishi Calm Drops' }}
+      </a>
+      <div class="lp-proof lp-reveal" data-d="3">
+        <span class="lp-stars">★★★★★</span>
+        <span>{{ section.settings.review_count | default: 2847 }} verified reviews &middot; {{ section.settings.proof_badge | default: 'Natural formula' }}</span>
       </div>
     </div>
-  </div>
-
-  <div class="lp-scroll-cue" aria-hidden="true">
-    <span class="lp-scroll-label">Scroll</span>
-    <div class="lp-scroll-bar"></div>
-  </div>
-</section>
-
-<!-- ═══════════ 2. PAIN POINT ═══════════ -->
-<section id="vlp-pain-{{ section.id }}">
-  <div class="lp-pain-inner">
-
-    <p class="lp-pain-quote lp-reveal">
-      "You're not <em>broken</em>.<br>You're overwhelmed."
-    </p>
-    <p class="lp-pain-sub lp-reveal" data-delay="1">
-      Chronic stress is the silent force behind poor sleep, brain fog, low energy, and mood swings.
-      Your body was never designed to run at this speed — indefinitely.
-    </p>
-
-    <div class="lp-pain-cards">
-      <div class="lp-pain-card lp-reveal" data-delay="1">
-        <div class="lp-pain-card__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 6v6l4 2"/></svg>
-        </div>
-        <h3 class="lp-pain-card__title">Restless nights</h3>
-        <p class="lp-pain-card__text">Your mind races at 2am. You replay conversations, worry about tomorrow, and wake up exhausted.</p>
-      </div>
-      <div class="lp-pain-card lp-reveal" data-delay="2">
-        <div class="lp-pain-card__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        </div>
-        <h3 class="lp-pain-card__title">Constant tension</h3>
-        <p class="lp-pain-card__text">Tight shoulders, clenched jaw, shallow breathing. Stress has become your default state.</p>
-      </div>
-      <div class="lp-pain-card lp-reveal" data-delay="3">
-        <div class="lp-pain-card__icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-        </div>
-        <h3 class="lp-pain-card__title">Mental fog</h3>
-        <p class="lp-pain-card__text">Even simple decisions feel heavy. Focus slips away. You go through the motions but feel disconnected.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════ 3. SOLUTION ═══════════ -->
-<section id="vlp-solution-{{ section.id }}">
-  <div class="lp-solution-inner">
-
-    <div class="lp-solution-img-wrap lp-reveal-left">
-      <div class="lp-solution-img-glow"></div>
-      {%- if section.settings.solution_image != blank -%}
-        {{ section.settings.solution_image | image_url: width: 700 | image_tag: class: 'lp-solution-img', alt: 'Vela Reishi Calm Drops' }}
+    <div class="lp-hero-img" aria-hidden="true">
+      <div class="lp-glow"></div>
+      {%- if section.settings.hero_image != blank -%}
+        <img src="{{ section.settings.hero_image | image_url: width: 600 }}" alt="{{ section.settings.hero_image.alt | escape }}" width="600" loading="eager">
       {%- else -%}
-        {{ 'product-2' | placeholder_svg_tag: 'lp-solution-img-placeholder' }}
+        {{ 'product-1' | placeholder_svg_tag }}
       {%- endif -%}
     </div>
-
-    <div class="lp-solution-content lp-reveal-right">
-      <span class="lp-eyebrow lp-eyebrow--light">The solution</span>
-      <h2 class="lp-h2 lp-h2--white" style="margin-bottom:1rem">
-        Meet Reishi<br><em style="font-style:italic">Calm Drops.</em>
-      </h2>
-      <p style="font-size:.96rem;line-height:1.74;color:rgba(255,255,255,.62);margin-bottom:1.8rem;max-width:44ch">
-        A concentrated liquid tincture made from dual-extracted Reishi mushroom — one of the world's most revered adaptogens.
-        Just a few drops a day supports your body's natural ability to adapt to stress.
-      </p>
-      <ul class="lp-solution-checks">
-        {%- assign benefits = 'Calms the nervous system naturally|Supports deep, restorative sleep|Reduces cortisol-driven fatigue|Enhances mental clarity & focus|No habit-forming ingredients' | split: '|' -%}
-        {%- for b in benefits -%}
-          <li class="lp-solution-check">
-            <span class="lp-check-icon">
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            {{ b }}
-          </li>
-        {%- endfor -%}
-      </ul>
-      <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="lp-btn lp-btn--white">
-        Shop now
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M1 7h12M7.5 1.5L13 7l-5.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-
   </div>
 </section>
 
-<!-- ═══════════ 4. HOW IT WORKS ═══════════ -->
+<!-- PAIN POINT -->
+<section id="vlp-pain-{{ section.id }}">
+  <span class="lp-eyebrow lp-reveal">The problem</span>
+  <h2 class="lp-h2 lp-reveal" data-d="1">You're not broken.<br>You're <em style="color:#7A4A9A;font-style:italic">overwhelmed.</em></h2>
+  <p class="lp-sub lp-reveal" data-d="2">Modern stress doesn't announce itself — it accumulates in your body until it becomes something you just live with. Until now.</p>
+  <div class="lp-cards">
+    <div class="lp-card lp-reveal"><div class="lp-card-icon">🌙</div><div class="lp-card-h">Restless nights</div><p class="lp-card-p">Your mind won't stop running. You lie awake at 2am replaying everything you need to do tomorrow.</p></div>
+    <div class="lp-card lp-reveal" data-d="1"><div class="lp-card-icon">⚡</div><div class="lp-card-h">Constant tension</div><p class="lp-card-p">Your shoulders are always up by your ears. Your jaw is clenched. Your body is in fight mode even when you're sitting still.</p></div>
+    <div class="lp-card lp-reveal" data-d="2"><div class="lp-card-icon">🌫️</div><div class="lp-card-h">Mental fog</div><p class="lp-card-p">Concentration slips away. You read the same sentence three times. The clarity you used to have feels out of reach.</p></div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="vlp-sol-{{ section.id }}">
+  <div class="lp-sol-in">
+    <div class="lp-sol-img lp-reveal">
+      {%- if section.settings.solution_image != blank -%}
+        <img src="{{ section.settings.solution_image | image_url: width: 600 }}" alt="{{ section.settings.solution_image.alt | escape }}" width="600" loading="lazy">
+      {%- else -%}
+        {{ 'product-2' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+    <div>
+      <span class="lp-eyebrow lp-reveal" style="color:rgba(255,255,255,0.6)">The solution</span>
+      <h2 class="lp-h2 lp-reveal" data-d="1" style="color:#fff;max-width:16ch">Nature's answer to modern stress</h2>
+      <div style="margin-top:2rem">
+        <div class="lp-check lp-reveal" data-d="1"><div class="lp-check-icon">✓</div><div><div class="lp-check-t">Clinically studied Reishi mushroom</div><p class="lp-check-p">Adaptogenic compounds that help your body regulate its stress response naturally.</p></div></div>
+        <div class="lp-check lp-reveal" data-d="2"><div class="lp-check-icon">✓</div><div><div class="lp-check-t">Ashwagandha + Lion's Mane</div><p class="lp-check-p">A synergistic blend that supports mental clarity and sustained calm throughout the day.</p></div></div>
+        <div class="lp-check lp-reveal" data-d="3"><div class="lp-check-icon">✓</div><div><div class="lp-check-t">Fast-absorbing liquid formula</div><p class="lp-check-p">Sublingual drops absorb up to 5× faster than capsules. Feel it in minutes, not hours.</p></div></div>
+        <div class="lp-check lp-reveal" data-d="3"><div class="lp-check-icon">✓</div><div><div class="lp-check-t">No melatonin. No sedatives.</div><p class="lp-check-p">Just pure plant intelligence — calming without clouding. Energizing without wiring.</p></div></div>
+      </div>
+      <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="lp-btn lp-reveal" data-d="3" style="margin-top:2rem;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.25)">
+        {{ section.settings.cta_text | default: 'Shop Reishi Calm Drops' }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
 <section id="vlp-how-{{ section.id }}">
-  <div class="lp-how-inner">
-    <div class="lp-how-header">
-      <span class="lp-eyebrow lp-reveal">How it works</span>
-      <h2 class="lp-h2 lp-h2--dark lp-reveal" data-delay="1">Three steps to calm.</h2>
-    </div>
-    <div class="lp-steps">
-      <div class="lp-step lp-reveal" data-delay="1">
-        <div class="lp-step-num">1</div>
-        <h3 class="lp-step-title">Drop it in</h3>
-        <p class="lp-step-text">Add 1ml to water, tea, or take it directly under your tongue. The liquid absorbs fast — no capsules, no waiting.</p>
-      </div>
-      <div class="lp-step lp-reveal" data-delay="2">
-        <div class="lp-step-num">2</div>
-        <h3 class="lp-step-title">Let it work</h3>
-        <p class="lp-step-text">Reishi activates your body's HPA axis — regulating cortisol and supporting your nervous system's natural calm response.</p>
-      </div>
-      <div class="lp-step lp-reveal" data-delay="3">
-        <div class="lp-step-num">3</div>
-        <h3 class="lp-step-title">Feel the shift</h3>
-        <p class="lp-step-text">Within days you'll notice easier evenings, clearer mornings, and a steadiness that comes from the inside out.</p>
-      </div>
-    </div>
+  <span class="lp-eyebrow lp-reveal">How it works</span>
+  <h2 class="lp-h2 lp-reveal" data-d="1">Three steps to calm</h2>
+  <div class="lp-steps">
+    <div class="lp-step lp-reveal"><div class="lp-step-num">1</div><div class="lp-step-h">Drop it under your tongue</div><p class="lp-step-p">Place a full dropper (1ml) under your tongue and hold for 30–60 seconds for maximum absorption.</p></div>
+    <div class="lp-step lp-reveal" data-d="1"><div class="lp-step-num">2</div><div class="lp-step-h">Let the adaptogens work</div><p class="lp-step-p">Reishi and Ashwagandha begin modulating your cortisol response within minutes of absorption.</p></div>
+    <div class="lp-step lp-reveal" data-d="2"><div class="lp-step-num">3</div><div class="lp-step-h">Feel the shift</div><p class="lp-step-p">A quieter mind. A looser jaw. The kind of calm that lets you be present — not checked out.</p></div>
   </div>
 </section>
 
-<!-- ═══════════ 5. INGREDIENTS ═══════════ -->
-<section id="vlp-ingr-{{ section.id }}">
-  <div class="lp-ingr-inner">
-    <div class="lp-ingr-header">
-      <span class="lp-eyebrow lp-reveal">What's inside</span>
-      <h2 class="lp-h2 lp-h2--dark lp-reveal" data-delay="1">Nothing hidden.<br>Everything intentional.</h2>
-    </div>
-    <div class="lp-ingr-grid">
-
-      <div class="lp-ingr-feature lp-reveal-left">
-        <div class="lp-ingr-feature-icon">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 28c3-6 7-15 18-21-6 6-9 15-6 21"/>
-            <path d="M8 28c9-3 15-9 18-21"/>
-            <path d="M8 28l4-7"/>
-          </svg>
-        </div>
-        <p class="lp-ingr-feature-sub">Star ingredient</p>
-        <h3 class="lp-ingr-feature-title">Reishi Mushroom</h3>
-        <p class="lp-ingr-feature-text">
-          Known as the "mushroom of immortality" in traditional Chinese medicine, Reishi (Ganoderma lucidum)
-          is an adaptogen that helps modulate the stress response, calm the nervous system, and support immune resilience.
-          Our dual-extraction process preserves both water-soluble beta-glucans and fat-soluble triterpenes.
-        </p>
-        <div class="lp-bars">
-          <div class="lp-bar-row">
-            <div class="lp-bar-label"><span>Stress adaptation</span><span>94%</span></div>
-            <div class="lp-bar-track"><div class="lp-bar-fill" data-width="94"></div></div>
-          </div>
-          <div class="lp-bar-row">
-            <div class="lp-bar-label"><span>Sleep quality support</span><span>88%</span></div>
-            <div class="lp-bar-track"><div class="lp-bar-fill" data-width="88"></div></div>
-          </div>
-          <div class="lp-bar-row">
-            <div class="lp-bar-label"><span>Immune modulation</span><span>91%</span></div>
-            <div class="lp-bar-track"><div class="lp-bar-fill" data-width="91"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="lp-ingr-list">
-        {%- assign ingrs = 'Ashwagandha Root|Proven to reduce cortisol by up to 30% in clinical studies. Supports calm energy without sedation.|Lion\'s Mane|Enhances cognitive function and nerve growth factor. Mental clarity without stimulants.|Passionflower Extract|A traditional nervine that quiets racing thoughts and promotes restful sleep onset.|Vegetable Glycerin Base|A clean, plant-derived carrier that ensures rapid sublingual absorption.|Purified Water|That\'s it. No fillers, no artificial ingredients, no surprises.' | split: '|' -%}
-        {%- assign icons = 'leaf,bolt,moon,drop,check' | split: ',' -%}
-        {%- assign idx = 0 -%}
-        {%- for i in (1..5) -%}
-          {%- assign name = ingrs[idx] -%}
-          {%- assign desc = ingrs[idx | plus: 1] -%}
-          {%- assign idx = idx | plus: 2 -%}
-          <div class="lp-ingr-card lp-reveal" data-delay="{{ i }}">
-            <div class="lp-ingr-card-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                {%- case i -%}
-                  {%- when 1 -%}<path d="M6 22c2-4 5-10 12-14-4 4-6 10-4 14"/><path d="M6 22c6-2 10-6 12-14"/>
-                  {%- when 2 -%}<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                  {%- when 3 -%}<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
-                  {%- when 4 -%}<path d="M12 2C12 2 6 10 6 15a6 6 0 0012 0c0-5-6-13-6-13z"/><path d="M9 18.5A3.5 3.5 0 0012.5 15"/>
-                  {%- when 5 -%}<path d="M20 6L9 17l-5-5"/>
-                {%- endcase -%}
-              </svg>
-            </div>
-            <div>
-              <p class="lp-ingr-card-title">{{ name }}</p>
-              <p class="lp-ingr-card-text">{{ desc }}</p>
-            </div>
-          </div>
-        {%- endfor -%}
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ 6. TESTIMONIALS ═══════════ -->
-<section id="vlp-testi-{{ section.id }}">
-  <div class="lp-testi-inner">
-    <div class="lp-testi-header">
-      <span class="lp-eyebrow lp-eyebrow--light lp-reveal">Real results</span>
-      <h2 class="lp-h2 lp-h2--white lp-reveal" data-delay="1">People are actually sleeping again.</h2>
-    </div>
-    <div class="lp-testi-grid">
-      {%- assign quotes = '"I was skeptical, but after two weeks I genuinely feel like a different person. The anxiety that used to wake me up at 3am is gone."|"My cortisol has been through the roof for years. Reishi Calm Drops is the first thing that\'s actually moved the needle. I feel it within an hour."|"Clean ingredients, beautiful packaging, and it actually works. I\'ve tried every supplement on the market. Vela is in a different league."' | split: '|' -%}
-      {%- assign authors = 'Sarah M.|James T.|Olivia R.' | split: '|' -%}
-      {%- for i in (0..2) -%}
-        <div class="lp-testi-card lp-reveal" data-delay="{{ i | plus: 1 }}">
-          <div class="lp-testi-stars">
-            {%- for s in (1..5) -%}
-              <svg class="lp-testi-star" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/>
-              </svg>
-            {%- endfor -%}
-          </div>
-          <p class="lp-testi-quote">{{ quotes[i] }}</p>
-          <div class="lp-testi-author">
-            <p class="lp-testi-name">{{ authors[i] }}</p>
-            <p class="lp-testi-product">Reishi Calm Drops</p>
-            <div class="lp-verified">
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="5" cy="5" r="5" fill="rgba(255,255,255,0.2)"/>
-                <path d="M3 5l1.5 1.5L7 3.5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              Verified purchase
-            </div>
-          </div>
-        </div>
-      {%- endfor -%}
-    </div>
-    <div class="lp-testi-summary">
-      <div class="lp-testi-stat lp-reveal" data-delay="1">
-        <span class="lp-testi-stat-val" data-count="4.9">0</span>
-        <span class="lp-testi-stat-label">Average rating</span>
-      </div>
-      <div class="lp-testi-stat lp-reveal" data-delay="2">
-        <span class="lp-testi-stat-val" data-count="{{ section.settings.review_count | default: 2847 }}">0</span>
-        <span class="lp-testi-stat-label">Verified reviews</span>
-      </div>
-      <div class="lp-testi-stat lp-reveal" data-delay="3">
-        <span class="lp-testi-stat-val" data-count="94">0</span>
-        <span class="lp-testi-stat-label">% would recommend</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ 7. FAQ ═══════════ -->
-<section id="vlp-faq-{{ section.id }}">
-  <div class="lp-faq-inner">
-    <div class="lp-faq-header">
-      <span class="lp-eyebrow lp-reveal">FAQ</span>
-      <h2 class="lp-h2 lp-h2--dark lp-reveal" data-delay="1">Questions answered.</h2>
-    </div>
-    {%- assign faq_qs = 'How soon will I feel results?|Does it make you drowsy?|Is it safe to take every day?|Can I take it with other supplements or medication?|What does it taste like?|Do you offer a money-back guarantee?' | split: '|' -%}
-    {%- assign faq_as = 'Most customers notice a difference within 3–7 days of consistent daily use. Adaptogens work cumulatively, so the effects deepen over time. We recommend giving it at least 30 days for full results.|No. Reishi supports a calm, clear-headed state — not sedation. Most customers take it in the morning or evening without feeling drowsy. If you\'re sensitive to adaptogens, start with half a serving.|Yes. Reishi Calm Drops is designed for daily use. The adaptogenic compounds in Reishi are non-habit-forming and safe for long-term supplementation.|We always recommend consulting your healthcare provider if you\'re on prescription medications or have a medical condition. That said, Reishi is generally well-tolerated and compatible with most wellness routines.|The tincture has a mild, earthy taste with subtle sweetness from the vegetable glycerin base. It blends seamlessly into coffee, tea, water, or smoothies.|Absolutely. We offer a 30-day satisfaction guarantee. If you\'re not happy with your results, contact us and we\'ll make it right — no questions asked.' | split: '|' -%}
-    <div class="lp-faq-list">
-      {%- for q in faq_qs -%}
-        <div class="lp-faq-item lp-reveal" data-delay="{{ forloop.index }}">
-          <div class="lp-faq-q" role="button" aria-expanded="false">
-            {{ q }}
-            <span class="lp-faq-icon" aria-hidden="true">
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-              </svg>
-            </span>
-          </div>
-          <div class="lp-faq-a">{{ faq_as[forloop.index0] }}</div>
-        </div>
-      {%- endfor -%}
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ 8. FINAL CTA ═══════════ -->
+<!-- CTA -->
 <section id="vlp-cta-{{ section.id }}">
-  <div class="lp-cta-orb lp-cta-orb--1"></div>
-  <div class="lp-cta-orb lp-cta-orb--2"></div>
-  <div class="lp-cta-inner">
-    <h2 class="lp-cta-h2 lp-reveal">
-      You deserve to feel <em>calm</em> again.
-    </h2>
-    <p class="lp-cta-sub lp-reveal" data-delay="1">
-      Join thousands of people who've made Reishi Calm Drops part of their daily ritual.
-      Your first bottle is backed by a 30-day guarantee.
-    </p>
-    <div class="lp-cta-btns lp-reveal" data-delay="2">
-      <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="lp-btn lp-btn--white lp-btn--shimmer">
-        Shop Reishi Calm Drops
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M1 7h12M7.5 1.5L13 7l-5.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-      <a href="#vlp-faq-{{ section.id }}" class="lp-btn lp-btn--outline">Read FAQ</a>
-    </div>
-    <div class="lp-cta-trust lp-reveal" data-delay="3">
-      {%- assign trust_items = '30-day guarantee|Free shipping over $50|Made in USA|No subscription required' | split: '|' -%}
-      {%- for t in trust_items -%}
-        <span class="lp-cta-trust-item">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M2 7l3 3 7-6"/>
-          </svg>
-          {{ t }}
-        </span>
-      {%- endfor -%}
+  <div class="lp-cta-orb lp-cta-orb-a" aria-hidden="true"></div>
+  <div class="lp-cta-orb lp-cta-orb-b" aria-hidden="true"></div>
+  <div class="lp-cta-in">
+    <h2 class="lp-cta-h lp-reveal">You deserve to feel <em>calm</em> again.</h2>
+    <p class="lp-cta-p lp-reveal" data-d="1">Join thousands who've made Reishi Calm Drops part of their daily ritual. Backed by a 30-day guarantee.</p>
+    <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="lp-btn lp-reveal" data-d="2">
+      {{ section.settings.cta_text | default: 'Shop Reishi Calm Drops' }}
+    </a>
+    <div class="lp-trust lp-reveal" data-d="3">
+      <span class="lp-trust-item">✓ 30-day guarantee</span>
+      <span class="lp-trust-item">✓ Free shipping over $50</span>
+      <span class="lp-trust-item">✓ Made in USA</span>
+      <span class="lp-trust-item">✓ No subscription required</span>
     </div>
   </div>
 </section>
 
-</div><!-- /vlp -->
+</div>
 
-<script src="{{ 'vela-landing.js' | asset_url }}" defer></script>
+<script>
+(function(){
+  var root = document.getElementById('vlp-{{ section.id }}');
+  if(!root) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);} });
+  },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  root.querySelectorAll('.lp-reveal').forEach(function(el){io.observe(el);});
+})();
+</script>
 
 {% schema %}
 {
   "name": "Vela Landing Page",
   "tag": "section",
+  "class": "section",
   "settings": [
-    { "type": "header", "content": "Hero" },
-    { "type": "text",     "id": "hero_eyebrow",  "label": "Eyebrow",       "default": "Introducing Vela" },
-    { "type": "textarea", "id": "hero_headline", "label": "Headline",      "default": "Modern life is relentless. Your body remembers." },
-    { "type": "textarea", "id": "hero_desc",     "label": "Description",   "default": "Reishi Calm Drops is a daily adaptogen tincture crafted to quiet the noise." },
-    { "type": "image_picker", "id": "hero_image",    "label": "Hero product image (dark background recommended)" },
-    { "type": "image_picker", "id": "solution_image","label": "Solution section product image" },
-    { "type": "header", "content": "CTA" },
-    { "type": "url",  "id": "cta_url",  "label": "Shop button URL" },
-    { "type": "text", "id": "cta_text", "label": "Shop button text", "default": "Shop Reishi Calm Drops" },
-    { "type": "header", "content": "Social proof" },
-    { "type": "number", "id": "review_count", "label": "Review count", "default": 2847 },
-    { "type": "text",   "id": "proof_badge",  "label": "Trust badge",  "default": "Natural formula" }
+    { "type": "text",         "id": "hero_eyebrow",  "label": "Hero eyebrow",   "default": "Introducing Vela" },
+    { "type": "textarea",     "id": "hero_headline", "label": "Hero headline",  "default": "Modern life is relentless. Your body remembers." },
+    { "type": "textarea",     "id": "hero_desc",     "label": "Hero description","default": "Reishi Calm Drops is a daily adaptogen tincture crafted to quiet the noise." },
+    { "type": "image_picker", "id": "hero_image",    "label": "Hero product image" },
+    { "type": "image_picker", "id": "solution_image","label": "Solution section image" },
+    { "type": "url",          "id": "cta_url",       "label": "Shop button URL" },
+    { "type": "text",         "id": "cta_text",      "label": "Shop button text","default": "Shop Reishi Calm Drops" },
+    { "type": "number",       "id": "review_count",  "label": "Review count",   "default": 2847 },
+    { "type": "text",         "id": "proof_badge",   "label": "Trust badge",    "default": "Natural formula" }
   ],
   "presets": [{ "name": "Vela Landing Page" }]
 }

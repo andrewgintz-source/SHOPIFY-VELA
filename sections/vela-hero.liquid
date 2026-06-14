@@ -1,232 +1,137 @@
-{% comment %}
-  VELA — Animated Hero Section
-  Pain point: Stress & overwhelm
-  Animations: orbs, word reveal, mouse parallax, shimmer, counter
-{% endcomment %}
+{% comment %}VELA — Dark Animated Hero{% endcomment %}
 
-{{ 'vela-hero.css' | asset_url | stylesheet_tag }}
+<style>
+  #vh-{{ section.id }} {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    position: relative;
+    overflow: hidden;
+    background: #0A0810;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+  }
+  #vh-{{ section.id }} .vh-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    animation: vh-drift 8s ease-in-out infinite;
+  }
+  #vh-{{ section.id }} .vh-orb--a { width:520px;height:520px;background:rgba(193,144,208,0.18);top:-10%;left:-8%;animation-delay:0s; }
+  #vh-{{ section.id }} .vh-orb--b { width:380px;height:380px;background:rgba(122,74,154,0.22);bottom:5%;right:2%;animation-delay:-3s; }
+  #vh-{{ section.id }} .vh-orb--c { width:260px;height:260px;background:rgba(193,144,208,0.12);top:40%;left:38%;animation-delay:-5s; }
+  @keyframes vh-drift { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-28px) scale(1.05)} }
+  #vh-{{ section.id }} .vh-inner {
+    position:relative;z-index:2;
+    display:grid;grid-template-columns:1fr 1fr;align-items:center;
+    max-width:1340px;margin:0 auto;padding:6rem 5%;gap:3rem;
+    width:100%;box-sizing:border-box;
+  }
+  #vh-{{ section.id }} .vh-content {
+    opacity:0;transform:translateY(22px);
+    animation:vh-up 0.9s 0.1s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+  @keyframes vh-up { to{opacity:1;transform:translateY(0)} }
+  #vh-{{ section.id }} .vh-eyebrow {
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:0.62rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;
+    color:rgba(193,144,208,0.85);margin-bottom:1.6rem;
+  }
+  #vh-{{ section.id }} .vh-dot {
+    width:6px;height:6px;border-radius:50%;background:#C190D0;
+    animation:vh-pulse 2s ease-in-out infinite;
+  }
+  @keyframes vh-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.7)} }
+  #vh-{{ section.id }} .vh-headline {
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:clamp(2.8rem,5vw,5rem);
+    font-weight:300;line-height:1.05;letter-spacing:-0.02em;
+    color:#fff;margin:0 0 1.4rem;max-width:14ch;
+  }
+  #vh-{{ section.id }} .vh-headline em { color:#C190D0;font-style:italic; }
+  #vh-{{ section.id }} .vh-body {
+    font-size:0.97rem;line-height:1.78;color:rgba(255,255,255,0.55);
+    margin:0 0 2.4rem;max-width:42ch;
+  }
+  #vh-{{ section.id }} .vh-row { display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap; }
+  #vh-{{ section.id }} .vh-btn {
+    display:inline-flex;align-items:center;gap:8px;
+    background:linear-gradient(135deg,#7A4A9A,#C190D0);
+    color:#fff;font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+    text-decoration:none;padding:14px 28px;border-radius:100px;
+    transition:transform 0.25s,box-shadow 0.25s;
+    box-shadow:0 8px 32px rgba(193,144,208,0.3);
+  }
+  #vh-{{ section.id }} .vh-btn:hover { transform:translateY(-2px);box-shadow:0 14px 40px rgba(193,144,208,0.45); }
+  #vh-{{ section.id }} .vh-link {
+    font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none;
+    border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:1px;
+    transition:color 0.2s,border-color 0.2s;
+  }
+  #vh-{{ section.id }} .vh-link:hover { color:#C190D0;border-color:#C190D0; }
+  #vh-{{ section.id }} .vh-proof {
+    display:flex;align-items:center;gap:10px;margin-top:2rem;
+    font-size:0.75rem;color:rgba(255,255,255,0.4);
+  }
+  #vh-{{ section.id }} .vh-stars { color:#C190D0;letter-spacing:1px; }
+  #vh-{{ section.id }} .vh-visual {
+    display:flex;justify-content:center;align-items:center;position:relative;
+    opacity:0;transform:translateX(20px);
+    animation:vh-slide 1s 0.35s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+  @keyframes vh-slide { to{opacity:1;transform:translateX(0)} }
+  #vh-{{ section.id }} .vh-img {
+    max-width:100%;max-height:520px;object-fit:contain;
+    animation:vh-float 5s ease-in-out infinite;position:relative;z-index:2;
+  }
+  @keyframes vh-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+  #vh-{{ section.id }} .vh-glow {
+    position:absolute;width:340px;height:340px;border-radius:50%;
+    background:radial-gradient(circle,rgba(193,144,208,0.18),transparent 70%);
+  }
+  @media(max-width:768px){
+    #vh-{{ section.id }} .vh-inner { grid-template-columns:1fr;padding:5rem 6% 4rem; }
+    #vh-{{ section.id }} .vh-visual { display:none; }
+    #vh-{{ section.id }} .vh-headline { font-size:clamp(2.4rem,9vw,3.4rem); }
+  }
+</style>
 
-<section id="vela-hero-{{ section.id }}" aria-label="Vela Hero">
-
-  <!-- Animated orbs -->
-  <div class="vela-hero__orbs" aria-hidden="true">
-    <div class="vela-orb vela-orb--1"></div>
-    <div class="vela-orb vela-orb--2"></div>
-    <div class="vela-orb vela-orb--3"></div>
-    <div class="vela-orb vela-orb--4"></div>
-  </div>
-
-  <div class="vela-hero__inner">
-
-    <!-- Left: Content -->
-    <div class="vela-hero__content">
-
-      <div class="vela-hero__eyebrow">
-        <span class="vela-hero__eyebrow-dot"></span>
-        {{ section.settings.eyebrow | default: 'Introducing Vela' }}
-      </div>
-
-      <h1 class="vela-hero__headline" id="vela-headline-{{ section.id }}">
-        {{ section.settings.headline | default: 'Modern life is relentless. Your body remembers.' }}
-      </h1>
-
-      <p class="vela-hero__sub">
-        {{ section.settings.subheadline | default: 'Deadlines. Notifications. The weight of everything. Your nervous system has been running on empty — and it's <strong>paying the price.</strong>' }}
-      </p>
-
-      <div class="vela-hero__divider"></div>
-
-      <p class="vela-hero__intro">
-        {{ section.settings.intro | default: 'Reishi Calm Drops is a daily adaptogen tincture crafted to quiet the noise — supporting your body\'s natural stress response so you can finally breathe again.' }}
-      </p>
-
-      <!-- Social proof -->
-      <div class="vela-hero__proof">
-        <div class="vela-hero__stars" aria-label="5 stars">
-          {%- for i in (1..5) -%}
-            <svg class="vela-hero__star" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/>
-            </svg>
-          {%- endfor -%}
-        </div>
-        <span class="vela-hero__proof-text">
-          <span class="vela-hero__proof-count" data-count="{{ section.settings.review_count | default: 2847 }}">0</span>
-          &nbsp;reviews
-        </span>
-        <div class="vela-hero__proof-divider" aria-hidden="true"></div>
-        <span class="vela-hero__proof-badge">{{ section.settings.proof_badge | default: 'Natural ingredients' }}</span>
-      </div>
-
-      <!-- CTA -->
-      <div class="vela-hero__cta-wrap">
-        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="vela-hero__cta">
-          {{ section.settings.cta_text | default: 'Shop now' }}
-          <svg class="vela-hero__cta-arrow" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M1 7h12M7.5 1.5L13 7l-5.5 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+<div id="vh-{{ section.id }}">
+  <div class="vh-orb vh-orb--a" aria-hidden="true"></div>
+  <div class="vh-orb vh-orb--b" aria-hidden="true"></div>
+  <div class="vh-orb vh-orb--c" aria-hidden="true"></div>
+  <div class="vh-inner">
+    <div class="vh-content">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="vh-eyebrow"><span class="vh-dot" aria-hidden="true"></span>{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      <h1 class="vh-headline">{{ section.settings.headline }}</h1>
+      {%- if section.settings.description != blank -%}
+        <p class="vh-body">{{ section.settings.description }}</p>
+      {%- endif -%}
+      <div class="vh-row">
+        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="vh-btn">
+          {{ section.settings.cta_text | default: 'Shop Now' }}
         </a>
-        {%- if section.settings.learn_url != blank -%}
-          <a href="{{ section.settings.learn_url }}" class="vela-hero__learn">
-            {{ section.settings.learn_text | default: 'Learn how it works' }}
-          </a>
+        {%- if section.settings.secondary_url != blank -%}
+          <a href="{{ section.settings.secondary_url }}" class="vh-link">{{ section.settings.secondary_text | default: 'Learn more' }}</a>
         {%- endif -%}
       </div>
-
-    </div><!-- /content -->
-
-    <!-- Right: Product visual -->
-    <div class="vela-hero__visual" id="vela-visual-{{ section.id }}" aria-hidden="true">
-
-      <!-- Glow + orbits -->
-      <div class="vela-hero__product-glow"></div>
-      <div class="vela-hero__orbit"></div>
-      <div class="vela-hero__orbit vela-hero__orbit--2"></div>
-
-      <!-- Product image -->
-      <div class="vela-hero__product-wrap" id="vela-product-{{ section.id }}">
-        {%- if section.settings.product_image != blank -%}
-          {{ section.settings.product_image | image_url: width: 600 | image_tag:
-            loading: 'eager',
-            fetchpriority: 'high',
-            class: 'vela-hero__product-img',
-            alt: section.settings.product_image.alt | escape
-          }}
-        {%- else -%}
-          {{ 'product-1' | placeholder_svg_tag: 'vela-hero__product-img' }}
-        {%- endif -%}
+      <div class="vh-proof">
+        <span class="vh-stars">★★★★★</span>
+        <span>{{ section.settings.review_count | default: 2847 }} verified reviews</span>
       </div>
-
-      <!-- Floating badge 1 -->
-      <div class="vela-hero__badge vela-hero__badge--1">
-        <span class="vela-hero__badge-label">Serving size</span>
-        <span class="vela-hero__badge-value">1ml <span>/ daily</span></span>
-      </div>
-
-      <!-- Floating badge 2 -->
-      <div class="vela-hero__badge vela-hero__badge--2">
-        <span class="vela-hero__badge-label">Key ingredient</span>
-        <span class="vela-hero__badge-value">Reishi <span>extract</span></span>
-      </div>
-
-    </div><!-- /visual -->
-
-  </div><!-- /inner -->
-
-  <!-- Scroll indicator -->
-  <div class="vela-hero__scroll" aria-hidden="true">
-    <span class="vela-hero__scroll-text">Scroll</span>
-    <div class="vela-hero__scroll-line"></div>
+    </div>
+    <div class="vh-visual" aria-hidden="true">
+      <div class="vh-glow"></div>
+      {%- if section.settings.product_image != blank -%}
+        <img class="vh-img" src="{{ section.settings.product_image | image_url: width: 600 }}" alt="{{ section.settings.product_image.alt | escape }}" width="600" loading="eager">
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'vh-img' }}
+      {%- endif -%}
+    </div>
   </div>
-
-</section>
-
-<script>
-(function () {
-  'use strict';
-
-  const heroId = 'vela-hero-{{ section.id }}';
-
-  /* ── Word-by-word headline animation ── */
-  function initHeadline() {
-    const el = document.getElementById('vela-headline-{{ section.id }}');
-    if (!el) return;
-
-    const rawText = el.textContent;
-    const words = rawText.trim().split(/\s+/);
-    el.innerHTML = words.map((w, i) => {
-      const isAccent = ['relentless.', 'relentless', 'calm', 'breathe', 'price.'].includes(w.toLowerCase());
-      const cls = isAccent ? 'word word--accent' : 'word';
-      const delay = (0.55 + i * 0.08).toFixed(2);
-      return `<span class="${cls}" style="animation-delay:${delay}s">${w}</span> `;
-    }).join('');
-  }
-
-  /* ── Review count-up ── */
-  function initCounter() {
-    const el = document.querySelector(`#${heroId} [data-count]`);
-    if (!el) return;
-
-    const target = parseInt(el.dataset.count, 10);
-    const duration = 2200;
-    const start = performance.now();
-
-    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
-
-    function tick(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      el.textContent = Math.round(easeOut(progress) * target).toLocaleString();
-      if (progress < 1) requestAnimationFrame(tick);
-    }
-
-    // Start counter when section enters viewport
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setTimeout(() => requestAnimationFrame(tick), 2200);
-          observer.disconnect();
-        }
-      });
-    }, { threshold: 0.3 });
-
-    const section = document.getElementById(heroId);
-    if (section) observer.observe(section);
-  }
-
-  /* ── Mouse parallax on product ── */
-  function initParallax() {
-    const visual = document.getElementById('vela-visual-{{ section.id }}');
-    const product = document.getElementById('vela-product-{{ section.id }}');
-    if (!visual || !product) return;
-
-    let animFrame;
-    let targetX = 0, targetY = 0;
-    let currentX = 0, currentY = 0;
-
-    document.addEventListener('mousemove', (e) => {
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
-      targetX = ((e.clientX / vw) - 0.5) * 22;
-      targetY = ((e.clientY / vh) - 0.5) * 14;
-    });
-
-    function lerp(a, b, t) { return a + (b - a) * t; }
-
-    function animate() {
-      currentX = lerp(currentX, targetX, 0.06);
-      currentY = lerp(currentY, targetY, 0.06);
-
-      // Pause CSS float animation during parallax
-      product.style.animationPlayState = 'paused';
-      product.style.transform = `translate(${currentX}px, ${currentY}px)`;
-
-      animFrame = requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    // Remove parallax on mobile
-    if (window.matchMedia('(max-width: 989px)').matches) {
-      cancelAnimationFrame(animFrame);
-      product.style.transform = '';
-      product.style.animationPlayState = 'running';
-    }
-  }
-
-  /* ── Init ── */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      initHeadline();
-      initCounter();
-      initParallax();
-    });
-  } else {
-    initHeadline();
-    initCounter();
-    initParallax();
-  }
-})();
-</script>
+</div>
 
 {% schema %}
 {
@@ -234,74 +139,16 @@
   "tag": "section",
   "class": "section",
   "settings": [
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow text",
-      "default": "Introducing Vela"
-    },
-    {
-      "type": "text",
-      "id": "headline",
-      "label": "Main headline",
-      "default": "Modern life is relentless. Your body remembers."
-    },
-    {
-      "type": "richtext",
-      "id": "subheadline",
-      "label": "Sub-headline",
-      "default": "<p>Deadlines. Notifications. The weight of everything. Your nervous system has been running on empty — and it's paying the price.</p>"
-    },
-    {
-      "type": "textarea",
-      "id": "intro",
-      "label": "Product intro line",
-      "default": "Reishi Calm Drops is a daily adaptogen tincture crafted to quiet the noise — supporting your body's natural stress response so you can finally breathe again."
-    },
-    {
-      "type": "number",
-      "id": "review_count",
-      "label": "Review count",
-      "default": 2847
-    },
-    {
-      "type": "text",
-      "id": "proof_badge",
-      "label": "Trust badge text",
-      "default": "Natural ingredients"
-    },
-    {
-      "type": "url",
-      "id": "cta_url",
-      "label": "Primary CTA link"
-    },
-    {
-      "type": "text",
-      "id": "cta_text",
-      "label": "Primary CTA text",
-      "default": "Shop now"
-    },
-    {
-      "type": "url",
-      "id": "learn_url",
-      "label": "Secondary link URL"
-    },
-    {
-      "type": "text",
-      "id": "learn_text",
-      "label": "Secondary link text",
-      "default": "Learn how it works"
-    },
-    {
-      "type": "image_picker",
-      "id": "product_image",
-      "label": "Product image"
-    }
+    { "type": "text",         "id": "eyebrow",       "label": "Eyebrow",            "default": "Introducing Vela" },
+    { "type": "textarea",     "id": "headline",      "label": "Headline",           "default": "Modern life is relentless. Your body remembers." },
+    { "type": "textarea",     "id": "description",   "label": "Description",        "default": "Reishi Calm Drops — a daily adaptogen tincture crafted to quiet the noise." },
+    { "type": "url",          "id": "cta_url",       "label": "Button URL" },
+    { "type": "text",         "id": "cta_text",      "label": "Button text",        "default": "Shop Reishi Calm Drops" },
+    { "type": "url",          "id": "secondary_url", "label": "Secondary link URL" },
+    { "type": "text",         "id": "secondary_text","label": "Secondary link text","default": "Learn more" },
+    { "type": "number",       "id": "review_count",  "label": "Review count",       "default": 2847 },
+    { "type": "image_picker", "id": "product_image", "label": "Product image" }
   ],
-  "presets": [
-    {
-      "name": "Vela Hero"
-    }
-  ]
+  "presets": [{ "name": "Vela Hero" }]
 }
 {% endschema %}

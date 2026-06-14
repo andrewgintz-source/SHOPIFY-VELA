@@ -1,0 +1,567 @@
+{% comment %}
+  VELA — Pink Hero Section
+  Matches brand mockup: blush pink bg, serif headline,
+  product image right, 5-column trust bar bottom.
+{% endcomment %}
+
+<style>
+  #vhs-{{ section.id }} {
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+    background-color: {{ section.settings.bg_color }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── Main hero split ── */
+  .vhs__main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    min-height: {{ section.settings.hero_height }}px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 5%;
+    gap: 2rem;
+  }
+
+  /* ── Left content ── */
+  .vhs__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 5rem 0 4rem;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: vhs-fade-up 0.8s 0.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .vhs__headline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2.8rem, 5.5vw, 5.4rem);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    margin: 0 0 1.4rem;
+    max-width: 12ch;
+  }
+
+  .vhs__product-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #7A4A9A;
+    margin-bottom: 1rem;
+  }
+
+  .vhs__description {
+    font-size: 0.96rem;
+    line-height: 1.7;
+    color: rgba(30, 20, 35, 0.72);
+    max-width: 36ch;
+    margin-bottom: 2.4rem;
+  }
+
+  /* CTA Button */
+  .vhs__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #1A1714;
+    background: #FFFFFF;
+    border: none;
+    border-radius: 100px;
+    padding: 1rem 2.2rem;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(30, 20, 35, 0.12);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    align-self: flex-start;
+  }
+
+  .vhs__cta svg {
+    transition: transform 0.3s ease;
+  }
+
+  .vhs__cta:hover {
+    background: #7A4A9A;
+    color: #FFFFFF;
+    box-shadow: 0 8px 32px rgba(122, 74, 154, 0.32);
+    transform: translateY(-2px);
+  }
+
+  .vhs__cta:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* ── Right: product image ── */
+  .vhs__image-wrap {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    min-height: {{ section.settings.hero_height }}px;
+    opacity: 0;
+    animation: vhs-fade-scale 1s 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .vhs__image {
+    width: 100%;
+    max-width: 680px;
+    height: {{ section.settings.hero_height }}px;
+    object-fit: contain;
+    object-position: center bottom;
+    display: block;
+  }
+
+  /* Placeholder */
+  .vhs__image-placeholder {
+    width: 100%;
+    max-width: 400px;
+    opacity: 0.3;
+  }
+
+  /* ── Trust bar ── */
+  .vhs__trust {
+    background: {{ section.settings.trust_bg }};
+    border-top: 1px solid rgba(193, 144, 208, 0.15);
+  }
+
+  .vhs__trust-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+  }
+
+  .vhs__trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1.3rem 1.2rem;
+    border-right: 1px solid rgba(193, 144, 208, 0.18);
+  }
+
+  .vhs__trust-item:last-child {
+    border-right: none;
+  }
+
+  .vhs__trust-icon {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #C190D0;
+  }
+
+  .vhs__trust-icon svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .vhs__trust-text-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .vhs__trust-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #1A1714;
+    line-height: 1.3;
+  }
+
+  .vhs__trust-sub {
+    font-size: 0.7rem;
+    color: rgba(30, 20, 35, 0.5);
+    line-height: 1.3;
+  }
+
+  /* ── Animations ── */
+  @keyframes vhs-fade-up {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes vhs-fade-scale {
+    from { opacity: 0; transform: scale(0.94) translateY(16px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 989px) {
+    .vhs__main {
+      grid-template-columns: 1fr;
+      padding: 0 6%;
+      gap: 0;
+      min-height: auto;
+    }
+
+    .vhs__content {
+      padding: 4rem 0 2rem;
+      text-align: center;
+      align-items: center;
+    }
+
+    .vhs__headline {
+      font-size: clamp(2.6rem, 8vw, 4rem);
+      max-width: none;
+    }
+
+    .vhs__description {
+      max-width: 100%;
+    }
+
+    .vhs__cta {
+      align-self: center;
+    }
+
+    .vhs__image-wrap {
+      min-height: 320px;
+      order: -1;
+    }
+
+    .vhs__image {
+      height: 320px;
+      object-position: center;
+    }
+
+    .vhs__trust-inner {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 4%;
+    }
+
+    .vhs__trust-item:nth-child(2) {
+      border-right: none;
+    }
+
+    .vhs__trust-item:nth-child(5) {
+      grid-column: span 2;
+      justify-content: center;
+      border-right: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .vhs__trust-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .vhs__trust-item {
+      border-right: none;
+      border-bottom: 1px solid rgba(193, 144, 208, 0.15);
+    }
+
+    .vhs__trust-item:last-child {
+      border-bottom: none;
+    }
+
+    .vhs__trust-item:nth-child(5) {
+      grid-column: span 1;
+      justify-content: flex-start;
+    }
+  }
+</style>
+
+<div id="vhs-{{ section.id }}">
+
+  <!-- ── Main Hero ── -->
+  <div class="vhs__main">
+
+    <!-- Left: Content -->
+    <div class="vhs__content">
+
+      {%- if section.settings.product_name != blank -%}
+        <p class="vhs__product-name">{{ section.settings.product_name }}</p>
+      {%- endif -%}
+
+      <h2 class="vhs__headline">{{ section.settings.headline }}</h2>
+
+      {%- if section.settings.description != blank -%}
+        <p class="vhs__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+
+      <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="vhs__cta">
+        {{ section.settings.cta_text | default: 'Shop Now' }}
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M2 8h12M8.5 2.5L14 8l-5.5 5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+    </div>
+
+    <!-- Right: Product Image -->
+    <div class="vhs__image-wrap">
+      {%- if section.settings.product_image != blank -%}
+        {{ section.settings.product_image | image_url: width: 1200 | image_tag:
+          loading: 'eager',
+          fetchpriority: 'high',
+          class: 'vhs__image',
+          alt: section.settings.product_image.alt | escape
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'vhs__image-placeholder' }}
+      {%- endif -%}
+    </div>
+
+  </div>
+
+  <!-- ── Trust Bar ── -->
+  <div class="vhs__trust">
+    <div class="vhs__trust-inner">
+
+      {%- for i in (1..5) -%}
+        {%- liquid
+          case i
+          when 1
+            assign icon_id = 'icon_1'
+            assign title_id = 'trust_1_title'
+            assign sub_id = 'trust_1_sub'
+            assign default_title = 'Supports Relaxation*'
+            assign default_sub = 'and Calm Mood'
+          when 2
+            assign icon_id = 'icon_2'
+            assign title_id = 'trust_2_title'
+            assign sub_id = 'trust_2_sub'
+            assign default_title = 'Supports Immune'
+            assign default_sub = 'Health & Resilience*'
+          when 3
+            assign icon_id = 'icon_3'
+            assign title_id = 'trust_3_title'
+            assign sub_id = 'trust_3_sub'
+            assign default_title = 'Adaptogenic'
+            assign default_sub = 'Mushroom Blend'
+          when 4
+            assign icon_id = 'icon_4'
+            assign title_id = 'trust_4_title'
+            assign sub_id = 'trust_4_sub'
+            assign default_title = 'Fast Absorbing'
+            assign default_sub = 'Liquid Drops'
+          when 5
+            assign icon_id = 'icon_5'
+            assign title_id = 'trust_5_title'
+            assign sub_id = 'trust_5_sub'
+            assign default_title = 'Made in the USA'
+            assign default_sub = 'with Global Ingredients'
+          endcase
+        -%}
+        <div class="vhs__trust-item">
+          <div class="vhs__trust-icon">
+            {%- case i -%}
+              {%- when 1 -%}
+                <!-- Lotus / relaxation -->
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 22c0 0-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                  <path d="M14 22c0 0 5-3 7-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M14 22c0 0-5-3-7-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M14 8v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              {%- when 2 -%}
+                <!-- Shield / immune -->
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 3l9 3.5v7c0 5-3.8 9.4-9 10.5C8.8 22.9 5 18.5 5 13.5v-7L14 3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                  <path d="M10 14l2.5 2.5L18 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              {%- when 3 -%}
+                <!-- Leaf / adaptogenic -->
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 22c2-4 5-10 12-14-4 4-6 10-4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6 22c6-2 10-6 12-14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M6 22l3-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              {%- when 4 -%}
+                <!-- Drop / liquid -->
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 4C14 4 7 12 7 17a7 7 0 0014 0c0-5-7-13-7-13z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                  <path d="M10.5 18.5a3.5 3.5 0 003-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              {%- when 5 -%}
+                <!-- Flag / USA -->
+                <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 5v18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M5 5h14l-3 5 3 5H5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+            {%- endcase -%}
+          </div>
+          <div class="vhs__trust-text-wrap">
+            <span class="vhs__trust-title">{{ section.settings[title_id] | default: default_title }}</span>
+            <span class="vhs__trust-sub">{{ section.settings[sub_id] | default: default_sub }}</span>
+          </div>
+        </div>
+      {%- endfor -%}
+
+    </div>
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "Vela Hero — Pink",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Hero background",
+      "default": "#EDAFBC"
+    },
+    {
+      "type": "color",
+      "id": "trust_bg",
+      "label": "Trust bar background",
+      "default": "#FAF0F3"
+    },
+    {
+      "type": "header",
+      "content": "Hero content"
+    },
+    {
+      "type": "range",
+      "id": "hero_height",
+      "min": 420,
+      "max": 780,
+      "step": 20,
+      "unit": "px",
+      "label": "Hero height",
+      "default": 580
+    },
+    {
+      "type": "text",
+      "id": "product_name",
+      "label": "Product label",
+      "default": "Reishi Calm Drops"
+    },
+    {
+      "type": "textarea",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Calm Your Mind. Balance Your Day."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "A calming blend of functional mushrooms traditionally valued to support relaxation, resilience, and overall wellness.*"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product image (use the pink background photo)"
+    },
+    {
+      "type": "header",
+      "content": "Trust Bar — Item 1"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_title",
+      "label": "Title",
+      "default": "Supports Relaxation*"
+    },
+    {
+      "type": "text",
+      "id": "trust_1_sub",
+      "label": "Subtitle",
+      "default": "and Calm Mood"
+    },
+    {
+      "type": "header",
+      "content": "Trust Bar — Item 2"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_title",
+      "label": "Title",
+      "default": "Supports Immune"
+    },
+    {
+      "type": "text",
+      "id": "trust_2_sub",
+      "label": "Subtitle",
+      "default": "Health & Resilience*"
+    },
+    {
+      "type": "header",
+      "content": "Trust Bar — Item 3"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_title",
+      "label": "Title",
+      "default": "Adaptogenic"
+    },
+    {
+      "type": "text",
+      "id": "trust_3_sub",
+      "label": "Subtitle",
+      "default": "Mushroom Blend"
+    },
+    {
+      "type": "header",
+      "content": "Trust Bar — Item 4"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_title",
+      "label": "Title",
+      "default": "Fast Absorbing"
+    },
+    {
+      "type": "text",
+      "id": "trust_4_sub",
+      "label": "Subtitle",
+      "default": "Liquid Drops"
+    },
+    {
+      "type": "header",
+      "content": "Trust Bar — Item 5"
+    },
+    {
+      "type": "text",
+      "id": "trust_5_title",
+      "label": "Title",
+      "default": "Made in the USA"
+    },
+    {
+      "type": "text",
+      "id": "trust_5_sub",
+      "label": "Subtitle",
+      "default": "with Global Ingredients"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vela Hero — Pink"
+    }
+  ]
+}
+{% endschema %}

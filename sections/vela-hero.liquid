@@ -17,9 +17,9 @@
     pointer-events: none;
     animation: vh-drift 8s ease-in-out infinite;
   }
-  #vh-{{ section.id }} .vh-orb--a { width:520px;height:520px;background:rgba(193,144,208,0.18);top:-10%;left:-8%;animation-delay:0s; }
-  #vh-{{ section.id }} .vh-orb--b { width:380px;height:380px;background:rgba(122,74,154,0.22);bottom:5%;right:2%;animation-delay:-3s; }
-  #vh-{{ section.id }} .vh-orb--c { width:260px;height:260px;background:rgba(193,144,208,0.12);top:40%;left:38%;animation-delay:-5s; }
+  #vh-{{ section.id }} .vh-orb--a { width:520px;height:520px;background:rgba(193,144,208,0.35);top:-10%;left:-8%;animation-delay:0s; }
+  #vh-{{ section.id }} .vh-orb--b { width:380px;height:380px;background:rgba(122,74,154,0.42);bottom:5%;right:2%;animation-delay:-3s; }
+  #vh-{{ section.id }} .vh-orb--c { width:260px;height:260px;background:rgba(193,144,208,0.28);top:40%;left:38%;animation-delay:-5s; }
   @keyframes vh-drift { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-28px) scale(1.05)} }
   #vh-{{ section.id }} .vh-inner {
     position:relative;z-index:2;
@@ -87,7 +87,7 @@
   @keyframes vh-float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
   #vh-{{ section.id }} .vh-glow {
     position:absolute;width:340px;height:340px;border-radius:50%;
-    background:radial-gradient(circle,rgba(193,144,208,0.18),transparent 70%);
+    background:radial-gradient(circle,rgba(193,144,208,0.35),transparent 70%);
   }
   @media(max-width:768px){
     #vh-{{ section.id }} .vh-inner { grid-template-columns:1fr;padding:5rem 6% 4rem; }

@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "vela-landing": {
+      "type": "vela-landing-page",
+      "settings": {
+        "hero_eyebrow": "Introducing Vela",
+        "hero_headline": "Modern life is relentless. Your body remembers.",
+        "hero_desc": "Reishi Calm Drops is a daily adaptogen tincture crafted to quiet the noise — supporting your body's natural stress response so you can finally breathe again.",
+        "cta_text": "Shop Reishi Calm Drops",
+        "review_count": 2847,
+        "proof_badge": "Natural formula"
+      }
+    }
+  },
+  "order": ["vela-landing"]
+}

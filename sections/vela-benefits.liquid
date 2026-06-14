@@ -1,0 +1,41 @@
+{% comment %}VELA — Benefits / Solution{% endcomment %}
+<style>
+  #vb-{{ section.id }}{font-family:'DM Sans',system-ui,sans-serif;padding:6rem 5%;background:linear-gradient(150deg,#7A4A9A,#A568C0,#C190D0)}
+  #vb-{{ section.id }} .vb-in{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;margin:0 auto}
+  #vb-{{ section.id }} .vb-img{display:flex;justify-content:center}
+  #vb-{{ section.id }} .vb-img img,.vb-img svg{max-height:460px;width:100%;object-fit:contain;border-radius:24px}
+  #vb-{{ section.id }} .vb-ey{font-size:0.62rem;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:rgba(255,255,255,0.6);display:block;margin-bottom:1.2rem}
+  #vb-{{ section.id }} .vb-h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:300;color:#fff;margin:0 0 2rem;line-height:1.1}
+  #vb-{{ section.id }} .vb-check{display:flex;gap:12px;align-items:flex-start;margin-bottom:1.4rem}
+  #vb-{{ section.id }} .vb-ci{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;font-size:0.75rem}
+  #vb-{{ section.id }} .vb-ct{font-weight:600;color:#fff;font-size:0.95rem;margin-bottom:0.2rem}
+  #vb-{{ section.id }} .vb-cp{font-size:0.85rem;color:rgba(255,255,255,0.65);line-height:1.6}
+  #vb-{{ section.id }} .vb-btn{display:inline-flex;align-items:center;gap:8px;margin-top:2rem;background:rgba(255,255,255,0.15);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:14px 28px;border-radius:100px;transition:background 0.2s}
+  #vb-{{ section.id }} .vb-btn:hover{background:rgba(255,255,255,0.25)}
+  @media(max-width:768px){#vb-{{ section.id }} .vb-in{grid-template-columns:1fr}#vb-{{ section.id }} .vb-img{display:none}}
+</style>
+<div id="vb-{{ section.id }}">
+  <div class="vb-in">
+    <div class="vb-img">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 600 }}" alt="{{ section.settings.image.alt | escape }}" width="600" loading="lazy">
+      {%- else -%}
+        {{ 'product-2' | placeholder_svg_tag }}
+      {%- endif -%}
+    </div>
+    <div>
+      <span class="vb-ey">{{ section.settings.eyebrow | default: 'The solution' }}</span>
+      <h2 class="vb-h2">{{ section.settings.heading | default: "Nature's answer to modern stress" }}</h2>
+      {%- for block in section.blocks -%}
+        <div class="vb-check" {{ block.shopify_attributes }}>
+          <div class="vb-ci">✓</div>
+          <div><div class="vb-ct">{{ block.settings.title }}</div><p class="vb-cp">{{ block.settings.description }}</p></div>
+        </div>
+      {%- endfor -%}
+      <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="vb-btn">{{ section.settings.cta_text | default: 'Shop Now' }}</a>
+    </div>
+  </div>
+</div>
+{% schema %}
+{"name":"Vela Benefits","tag":"section","class":"section","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"The solution"},{"type":"textarea","id":"heading","label":"Heading","default":"Nature's answer to modern stress"},{"type":"image_picker","id":"image","label":"Product image"},{"type":"url","id":"cta_url","label":"Button URL"},{"type":"text","id":"cta_text","label":"Button text","default":"Shop Reishi Calm Drops"}],"blocks":[{"type":"benefit","name":"Benefit","settings":[{"type":"text","id":"title","label":"Title","default":"Clinically studied Reishi mushroom"},{"type":"textarea","id":"description","label":"Description","default":"Adaptogenic compounds that help your body regulate its stress response naturally."}]}],"presets":[{"name":"Vela Benefits","blocks":[{"type":"benefit","settings":{"title":"Clinically studied Reishi mushroom","description":"Adaptogenic compounds that help your body regulate its stress response naturally."}},{"type":"benefit","settings":{"title":"Ashwagandha + Lion's Mane","description":"A synergistic blend supporting mental clarity and sustained calm throughout the day."}},{"type":"benefit","settings":{"title":"Fast-absorbing liquid formula","description":"Sublingual drops absorb up to 5× faster than capsules. Feel it in minutes, not hours."}},{"type":"benefit","settings":{"title":"No melatonin. No sedatives.","description":"Pure plant intelligence — calming without clouding. Energizing without wiring."}}]}]}
+{% endschema %}

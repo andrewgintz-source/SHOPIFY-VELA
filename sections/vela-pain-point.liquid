@@ -1,0 +1,30 @@
+{% comment %}VELA — Pain Point{% endcomment %}
+<style>
+  #vpp-{{ section.id }}{font-family:'DM Sans',system-ui,sans-serif;padding:6rem 5%;background:#fff;text-align:center}
+  #vpp-{{ section.id }} .vpp-ey{font-size:0.62rem;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:#7A4A9A;display:block;margin-bottom:1.2rem}
+  #vpp-{{ section.id }} .vpp-h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:300;line-height:1.1;margin:0 auto 1rem;max-width:18ch;color:#0A0810}
+  #vpp-{{ section.id }} .vpp-sub{font-size:0.96rem;line-height:1.76;color:#9B8FA3;max-width:52ch;margin:0 auto 3.5rem}
+  #vpp-{{ section.id }} .vpp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1100px;margin:0 auto}
+  #vpp-{{ section.id }} .vpp-card{background:#FAF8FC;border-radius:16px;padding:2.2rem 1.8rem;text-align:left}
+  #vpp-{{ section.id }} .vpp-icon{font-size:2rem;margin-bottom:1rem}
+  #vpp-{{ section.id }} .vpp-ch{font-weight:700;font-size:0.95rem;margin-bottom:0.5rem;color:#1E1A22}
+  #vpp-{{ section.id }} .vpp-cp{font-size:0.88rem;line-height:1.7;color:#9B8FA3}
+  @media(max-width:768px){#vpp-{{ section.id }} .vpp-grid{grid-template-columns:1fr}}
+</style>
+<div id="vpp-{{ section.id }}">
+  <span class="vpp-ey">{{ section.settings.eyebrow | default: 'The problem' }}</span>
+  <h2 class="vpp-h2">{{ section.settings.heading | default: "You're not broken. You're overwhelmed." }}</h2>
+  <p class="vpp-sub">{{ section.settings.subheading | default: 'Modern stress accumulates in your body until it becomes something you just live with. Until now.' }}</p>
+  <div class="vpp-grid">
+    {%- for block in section.blocks -%}
+      <div class="vpp-card" {{ block.shopify_attributes }}>
+        <div class="vpp-icon">{{ block.settings.icon }}</div>
+        <div class="vpp-ch">{{ block.settings.title }}</div>
+        <p class="vpp-cp">{{ block.settings.description }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+{% schema %}
+{"name":"Vela Pain Point","tag":"section","class":"section","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"The problem"},{"type":"textarea","id":"heading","label":"Heading","default":"You're not broken. You're overwhelmed."},{"type":"textarea","id":"subheading","label":"Subheading","default":"Modern stress accumulates in your body until it becomes something you just live with. Until now."}],"blocks":[{"type":"card","name":"Problem card","settings":[{"type":"text","id":"icon","label":"Emoji icon","default":"🌙"},{"type":"text","id":"title","label":"Title","default":"Restless nights"},{"type":"textarea","id":"description","label":"Description","default":"Your mind won't stop running. You lie awake replaying everything you need to do tomorrow."}]}],"presets":[{"name":"Vela Pain Point","blocks":[{"type":"card","settings":{"icon":"🌙","title":"Restless nights","description":"Your mind won't stop running. You lie awake at 2am replaying everything you need to do tomorrow."}},{"type":"card","settings":{"icon":"⚡","title":"Constant tension","description":"Shoulders up by your ears. Jaw clenched. Your body stuck in fight mode even when you're sitting still."}},{"type":"card","settings":{"icon":"🌫️","title":"Mental fog","description":"Concentration slips away. You read the same sentence three times. Clarity feels out of reach."}}]}]}
+{% endschema %}

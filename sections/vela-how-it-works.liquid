@@ -1,0 +1,30 @@
+{% comment %}VELA — How It Works{% endcomment %}
+<style>
+  #vhw-{{ section.id }}{font-family:'DM Sans',system-ui,sans-serif;padding:6rem 5%;background:#F9F6FC;text-align:center}
+  #vhw-{{ section.id }} .vhw-ey{font-size:0.62rem;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:#7A4A9A;display:block;margin-bottom:1.2rem}
+  #vhw-{{ section.id }} .vhw-h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:300;color:#0A0810;margin:0 auto 0.8rem}
+  #vhw-{{ section.id }} .vhw-sub{font-size:0.96rem;color:#9B8FA3;max-width:50ch;margin:0 auto 3rem}
+  #vhw-{{ section.id }} .vhw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1000px;margin:0 auto}
+  #vhw-{{ section.id }} .vhw-step{padding:2rem 1.5rem}
+  #vhw-{{ section.id }} .vhw-num{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#7A4A9A,#C190D0);color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem}
+  #vhw-{{ section.id }} .vhw-sh{font-weight:700;font-size:0.95rem;margin-bottom:0.5rem;color:#1E1A22}
+  #vhw-{{ section.id }} .vhw-sp{font-size:0.88rem;line-height:1.7;color:#9B8FA3}
+  @media(max-width:768px){#vhw-{{ section.id }} .vhw-grid{grid-template-columns:1fr}}
+</style>
+<div id="vhw-{{ section.id }}">
+  <span class="vhw-ey">{{ section.settings.eyebrow | default: 'How it works' }}</span>
+  <h2 class="vhw-h2">{{ section.settings.heading | default: 'Three steps to calm' }}</h2>
+  <p class="vhw-sub">{{ section.settings.subheading }}</p>
+  <div class="vhw-grid">
+    {%- for block in section.blocks -%}
+      <div class="vhw-step" {{ block.shopify_attributes }}>
+        <div class="vhw-num">{{ forloop.index }}</div>
+        <div class="vhw-sh">{{ block.settings.title }}</div>
+        <p class="vhw-sp">{{ block.settings.description }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+{% schema %}
+{"name":"Vela How It Works","tag":"section","class":"section","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"How it works"},{"type":"text","id":"heading","label":"Heading","default":"Three steps to calm"},{"type":"textarea","id":"subheading","label":"Subheading"}],"blocks":[{"type":"step","name":"Step","settings":[{"type":"text","id":"title","label":"Step title","default":"Drop it under your tongue"},{"type":"textarea","id":"description","label":"Description","default":"Place a full dropper under your tongue and hold for 30–60 seconds for maximum absorption."}]}],"presets":[{"name":"Vela How It Works","blocks":[{"type":"step","settings":{"title":"Drop it under your tongue","description":"Place a full dropper (1ml) under your tongue and hold for 30–60 seconds for maximum absorption."}},{"type":"step","settings":{"title":"Let the adaptogens work","description":"Reishi and Ashwagandha begin modulating your cortisol response within minutes of absorption."}},{"type":"step","settings":{"title":"Feel the shift","description":"A quieter mind. A looser jaw. The kind of calm that lets you be present — not checked out."}}]}]}
+{% endschema %}

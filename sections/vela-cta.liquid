@@ -1,0 +1,33 @@
+{% comment %}VELA — CTA Banner{% endcomment %}
+<style>
+  #vcta-{{ section.id }}{font-family:'DM Sans',system-ui,sans-serif;padding:7rem 5%;background:#0A0810;text-align:center;position:relative;overflow:hidden}
+  #vcta-{{ section.id }} .vcta-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+  #vcta-{{ section.id }} .vcta-orb-a{width:400px;height:400px;background:rgba(193,144,208,0.18);top:-20%;left:-10%}
+  #vcta-{{ section.id }} .vcta-orb-b{width:300px;height:300px;background:rgba(122,74,154,0.22);bottom:-10%;right:5%}
+  #vcta-{{ section.id }} .vcta-in{position:relative;z-index:2}
+  #vcta-{{ section.id }} .vcta-h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2.4rem,4.5vw,4rem);font-weight:300;color:#fff;margin:0 auto 1rem;max-width:20ch;line-height:1.1}
+  #vcta-{{ section.id }} .vcta-h2 em{color:#C190D0;font-style:italic}
+  #vcta-{{ section.id }} .vcta-p{font-size:0.97rem;color:rgba(255,255,255,0.5);margin:0 auto 2.5rem;max-width:50ch}
+  #vcta-{{ section.id }} .vcta-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#7A4A9A,#C190D0);color:#fff;font-size:0.82rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;padding:15px 32px;border-radius:100px;box-shadow:0 8px 32px rgba(193,144,208,0.3);transition:transform 0.2s,box-shadow 0.2s}
+  #vcta-{{ section.id }} .vcta-btn:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(193,144,208,0.45)}
+  #vcta-{{ section.id }} .vcta-trust{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:2rem}
+  #vcta-{{ section.id }} .vcta-ti{font-size:0.75rem;color:rgba(255,255,255,0.38)}
+</style>
+<div id="vcta-{{ section.id }}">
+  <div class="vcta-orb vcta-orb-a" aria-hidden="true"></div>
+  <div class="vcta-orb vcta-orb-b" aria-hidden="true"></div>
+  <div class="vcta-in">
+    <h2 class="vcta-h2">{{ section.settings.heading | default: 'You deserve to feel calm again.' }}</h2>
+    <p class="vcta-p">{{ section.settings.subheading | default: 'Join thousands who have made Reishi Calm Drops part of their daily ritual. Backed by a 30-day guarantee.' }}</p>
+    <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="vcta-btn">{{ section.settings.cta_text | default: 'Shop Reishi Calm Drops' }}</a>
+    <div class="vcta-trust">
+      <span class="vcta-ti">✓ 30-day guarantee</span>
+      <span class="vcta-ti">✓ Free shipping over $50</span>
+      <span class="vcta-ti">✓ Made in USA</span>
+      <span class="vcta-ti">✓ No subscription required</span>
+    </div>
+  </div>
+</div>
+{% schema %}
+{"name":"Vela CTA","tag":"section","class":"section","settings":[{"type":"textarea","id":"heading","label":"Heading","default":"You deserve to feel calm again."},{"type":"textarea","id":"subheading","label":"Subheading","default":"Join thousands who have made Reishi Calm Drops part of their daily ritual. Backed by a 30-day guarantee."},{"type":"url","id":"cta_url","label":"Button URL"},{"type":"text","id":"cta_text","label":"Button text","default":"Shop Reishi Calm Drops"}],"presets":[{"name":"Vela CTA"}]}
+{% endschema %}

@@ -187,23 +187,6 @@
         "subheading": ""
       }
     },
-    "image_banner_VJBXh4": {
-      "type": "image-banner",
-      "name": "t:sections.image-banner.presets.name",
-      "settings": {
-        "image": "shopify://shop_images/ChatGPT_Image_Jun_13_2026_at_04_22_34_PM.png",
-        "image_overlay_opacity": 0,
-        "image_height": "medium",
-        "image_behavior": "none",
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": true,
-        "color_scheme": "",
-        "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
-        "show_text_below": true
-      }
-    },
     "featured_collection_VmpFMz": {
       "type": "featured-collection",
       "name": "t:sections.featured-collection.presets.name",
@@ -235,7 +218,6 @@
     }
   },
   "order": [
-    "image_banner_VJBXh4",
     "vela_pain_point_MGdNtV",
     "vela_benefits_bkLz3M",
     "vela_testimonials_KAPNVL",

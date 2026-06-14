@@ -9,42 +9,189 @@
  */
 {
   "sections": {
-    "image_banner_VJBXh4": {
-      "type": "image-banner",
+    "vela_pain_point_MGdNtV": {
+      "type": "vela-pain-point",
       "blocks": {
-        "heading_EjxCjD": {
-          "type": "heading",
+        "card_HBKQRL": {
+          "type": "card",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h1"
+            "icon": "🌙",
+            "title": "Restless nights",
+            "description": "Your mind won't stop running. You lie awake at 2am replaying everything you need to do tomorrow."
           }
         },
-        "text_qTMLrh": {
-          "type": "text",
+        "card_R9xtjQ": {
+          "type": "card",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
+            "icon": "⚡",
+            "title": "Constant tension",
+            "description": "Shoulders up by your ears. Jaw clenched. Your body stuck in fight mode even when you're sitting still."
           }
         },
-        "buttons_xJRgGw": {
-          "type": "buttons",
+        "card_zakVM6": {
+          "type": "card",
           "settings": {
-            "button_label_1": "Button label",
-            "button_link_1": "",
-            "button_style_secondary_1": false,
-            "button_label_2": "Button label",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "icon": "🌫️",
+            "title": "Mental fog",
+            "description": "Concentration slips away. You read the same sentence three times. Clarity feels out of reach."
           }
         }
       },
       "block_order": [
-        "heading_EjxCjD",
-        "text_qTMLrh",
-        "buttons_xJRgGw"
+        "card_HBKQRL",
+        "card_R9xtjQ",
+        "card_zakVM6"
       ],
+      "name": "Vela Pain Point",
+      "settings": {
+        "eyebrow": "The problem",
+        "heading": "You're not broken. You're overwhelmed.",
+        "subheading": "Modern stress accumulates in your body until it becomes something you just live with. Until now."
+      }
+    },
+    "vela_benefits_bkLz3M": {
+      "type": "vela-benefits",
+      "blocks": {
+        "benefit_UUdHwy": {
+          "type": "benefit",
+          "settings": {
+            "title": "Clinically studied Reishi mushroom",
+            "description": "Adaptogenic compounds that help your body regulate its stress response naturally."
+          }
+        },
+        "benefit_6LLhQF": {
+          "type": "benefit",
+          "settings": {
+            "title": "Ashwagandha + Lion's Mane",
+            "description": "A synergistic blend supporting mental clarity and sustained calm throughout the day."
+          }
+        },
+        "benefit_Q4rTaG": {
+          "type": "benefit",
+          "settings": {
+            "title": "Fast-absorbing liquid formula",
+            "description": "Sublingual drops absorb up to 5× faster than capsules. Feel it in minutes, not hours."
+          }
+        },
+        "benefit_P39LWk": {
+          "type": "benefit",
+          "settings": {
+            "title": "No melatonin. No sedatives.",
+            "description": "Pure plant intelligence — calming without clouding. Energizing without wiring."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_UUdHwy",
+        "benefit_6LLhQF",
+        "benefit_Q4rTaG",
+        "benefit_P39LWk"
+      ],
+      "name": "Vela Benefits",
+      "settings": {
+        "eyebrow": "The solution",
+        "heading": "Nature's answer to modern stress",
+        "cta_url": "",
+        "cta_text": "Shop Reishi Calm Drops"
+      }
+    },
+    "vela_testimonials_KAPNVL": {
+      "type": "vela-testimonials",
+      "blocks": {
+        "testimonial_mtdzPA": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "I was skeptical at first, but after two weeks of taking Reishi Calm Drops every night, I genuinely feel more relaxed. My sleep quality has improved noticeably.",
+            "author": "Sarah M.",
+            "product_name": "Reishi Calm Drops",
+            "verified": true
+          }
+        },
+        "testimonial_FbbhEn": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "The taste is subtle and earthy — nothing like I expected. It’s become a ritual I actually look forward to. My anxiety feels so much more manageable.",
+            "author": "James T.",
+            "product_name": "Reishi Calm Drops",
+            "verified": true
+          }
+        },
+        "testimonial_eRwwz4": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Clean ingredients, beautiful packaging, and it actually works. Vela is exactly what I’ve been looking for in a wellness brand.",
+            "author": "Olivia R.",
+            "product_name": "Reishi Calm Drops",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_mtdzPA",
+        "testimonial_FbbhEn",
+        "testimonial_eRwwz4"
+      ],
+      "name": "Vela Testimonials",
+      "settings": {
+        "eyebrow": "What customers say",
+        "title": "Real results, real people"
+      }
+    },
+    "vela_cta_T63TAR": {
+      "type": "vela-cta",
+      "name": "Vela CTA",
+      "settings": {
+        "heading": "You deserve to feel calm again.",
+        "subheading": "Join thousands who have made Reishi Calm Drops part of their daily ritual. Backed by a 30-day guarantee.",
+        "cta_url": "",
+        "cta_text": "Shop Reishi Calm Drops"
+      }
+    },
+    "vela_how_it_works_JMMUHy": {
+      "type": "vela-how-it-works",
+      "blocks": {
+        "step_DftFhz": {
+          "type": "step",
+          "settings": {
+            "title": "Drop it under your tongue",
+            "description": "Place a full dropper (1ml) under your tongue and hold for 30–60 seconds for maximum absorption."
+          }
+        },
+        "step_RtFjVJ": {
+          "type": "step",
+          "settings": {
+            "title": "Let the adaptogens work",
+            "description": "Reishi and Ashwagandha begin modulating your cortisol response within minutes of absorption."
+          }
+        },
+        "step_FeqBa4": {
+          "type": "step",
+          "settings": {
+            "title": "Feel the shift",
+            "description": "A quieter mind. A looser jaw. The kind of calm that lets you be present — not checked out."
+          }
+        }
+      },
+      "block_order": [
+        "step_DftFhz",
+        "step_RtFjVJ",
+        "step_FeqBa4"
+      ],
+      "name": "Vela How It Works",
+      "settings": {
+        "eyebrow": "How it works",
+        "heading": "Three steps to calm",
+        "subheading": ""
+      }
+    },
+    "image_banner_VJBXh4": {
+      "type": "image-banner",
       "name": "t:sections.image-banner.presets.name",
       "settings": {
+        "image": "shopify://shop_images/ChatGPT_Image_Jun_13_2026_at_04_22_34_PM.png",
         "image_overlay_opacity": 0,
         "image_height": "medium",
         "image_behavior": "none",
@@ -85,25 +232,15 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
-    },
-    "vela_hero_aaAWHT": {
-      "type": "vela-hero",
-      "name": "Vela Hero",
-      "settings": {
-        "eyebrow": "Introducing Vela",
-        "headline": "Modern life is relentless. Your body remembers.",
-        "description": "Reishi Calm Drops — a daily adaptogen tincture crafted to quiet the noise.",
-        "cta_url": "",
-        "cta_text": "Shop Reishi Calm Drops",
-        "secondary_url": "",
-        "secondary_text": "Learn more",
-        "review_count": 2847
-      }
     }
   },
   "order": [
     "image_banner_VJBXh4",
-    "featured_collection_VmpFMz",
-    "vela_hero_aaAWHT"
+    "vela_pain_point_MGdNtV",
+    "vela_benefits_bkLz3M",
+    "vela_testimonials_KAPNVL",
+    "vela_cta_T63TAR",
+    "vela_how_it_works_JMMUHy",
+    "featured_collection_VmpFMz"
   ]
 }

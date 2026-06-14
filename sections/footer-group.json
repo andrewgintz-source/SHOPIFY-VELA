@@ -11,6 +11,50 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "vela_faq_ihcGfD": {
+      "type": "vela-faq",
+      "blocks": {
+        "faq_JCRJnh": {
+          "type": "faq",
+          "settings": {
+            "question": "How long until I feel results?",
+            "answer": "Most customers notice a difference within 20–40 minutes of their first dose. For deeper cumulative effects allow 2–4 weeks of consistent daily use."
+          }
+        },
+        "faq_mB97JC": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I take Reishi Calm Drops?",
+            "answer": "Place one full dropper (1ml) under your tongue, hold for 30–60 seconds, then swallow. Best taken in the evening or during high-stress moments."
+          }
+        },
+        "faq_7cr9yf": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it safe to take every day?",
+            "answer": "Yes. All ingredients are well-studied adaptogens with strong safety profiles for daily long-term use. No dependency or tolerance buildup."
+          }
+        },
+        "faq_TwMC9r": {
+          "type": "faq",
+          "settings": {
+            "question": "Will it make me drowsy?",
+            "answer": "No. Reishi Calm Drops are designed to promote calm without sedation. You can take them during the day without feeling foggy or tired."
+          }
+        }
+      },
+      "block_order": [
+        "faq_JCRJnh",
+        "faq_mB97JC",
+        "faq_7cr9yf",
+        "faq_TwMC9r"
+      ],
+      "name": "Vela FAQ",
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Common questions"
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -59,6 +103,7 @@
     }
   },
   "order": [
+    "vela_faq_ihcGfD",
     "footer"
   ]
 }

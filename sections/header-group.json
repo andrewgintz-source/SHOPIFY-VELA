@@ -56,55 +56,25 @@
         "padding_bottom": 20
       }
     },
-    "vela_testimonials_4rrraG": {
-      "type": "vela-testimonials",
-      "blocks": {
-        "testimonial_T9qChH": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "I was skeptical at first, but after two weeks of taking Reishi Calm Drops every night, I genuinely feel more relaxed. My sleep quality has improved noticeably.",
-            "author": "Sarah M.",
-            "product_name": "Reishi Calm Drops",
-            "verified": true
-          }
-        },
-        "testimonial_7B8kMq": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "The taste is subtle and earthy — nothing like I expected. It’s become a ritual I actually look forward to. My anxiety feels so much more manageable.",
-            "author": "James T.",
-            "product_name": "Reishi Calm Drops",
-            "verified": true
-          }
-        },
-        "testimonial_GdKPzb": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "quote": "Clean ingredients, beautiful packaging, and it actually works. Vela is exactly what I’ve been looking for in a wellness brand.",
-            "author": "Olivia R.",
-            "product_name": "Reishi Calm Drops",
-            "verified": true
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_T9qChH",
-        "testimonial_7B8kMq",
-        "testimonial_GdKPzb"
-      ],
-      "name": "Vela Testimonials",
+    "vela_hero_d6Tmjf": {
+      "type": "vela-hero",
+      "name": "Vela Hero",
       "settings": {
-        "eyebrow": "What customers say",
-        "title": "Real results, real people"
+        "eyebrow": "Introducing Vela",
+        "headline": "Modern life is relentless. Your body remembers.",
+        "description": "Reishi Calm Drops — a daily adaptogen tincture crafted to quiet the noise.",
+        "cta_url": "",
+        "cta_text": "Shop Reishi Calm Drops",
+        "secondary_url": "",
+        "secondary_text": "Learn more",
+        "review_count": 2847,
+        "product_image": "shopify://shop_images/ChatGPT_Image_Jun_13_2026_at_04_22_34_PM.png"
       }
     }
   },
   "order": [
     "announcement-bar",
     "header",
-    "vela_testimonials_4rrraG"
+    "vela_hero_d6Tmjf"
   ]
 }

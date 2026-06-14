@@ -1,16 +1,16 @@
 {% comment %}VELA — FAQ{% endcomment %}
 <style>
-  #vfaq-{{ section.id }}{font-family:'DM Sans',system-ui,sans-serif;padding:6rem 5%;background:#fff}
+  #vfaq-{{ section.id }}{font-family:'DM Sans',system-ui,sans-serif;padding:6rem 5%;background:linear-gradient(150deg,#7A4A9A,#A568C0,#C190D0)}
   #vfaq-{{ section.id }} .vfaq-in{max-width:760px;margin:0 auto}
-  #vfaq-{{ section.id }} .vfaq-ey{font-size:0.62rem;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:#7A4A9A;display:block;margin-bottom:1.2rem;text-align:center}
-  #vfaq-{{ section.id }} .vfaq-h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:#0A0810;text-align:center;margin:0 0 3rem}
-  #vfaq-{{ section.id }} .vfaq-item{border-bottom:1px solid #EDE9F2}
-  #vfaq-{{ section.id }} .vfaq-q{width:100%;background:none;border:none;text-align:left;padding:1.4rem 0;font-size:0.97rem;font-weight:600;color:#1E1A22;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:'DM Sans',sans-serif}
+  #vfaq-{{ section.id }} .vfaq-ey{font-size:0.62rem;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:rgba(255,255,255,0.65);display:block;margin-bottom:1.2rem;text-align:center}
+  #vfaq-{{ section.id }} .vfaq-h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;color:#fff;text-align:center;margin:0 0 3rem}
+  #vfaq-{{ section.id }} .vfaq-item{border-bottom:1px solid rgba(255,255,255,0.2)}
+  #vfaq-{{ section.id }} .vfaq-q{width:100%;background:none;border:none;text-align:left;padding:1.4rem 0;font-size:0.97rem;font-weight:600;color:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:'DM Sans',sans-serif}
   #vfaq-{{ section.id }} .vfaq-icon{transition:transform 0.3s;color:#C190D0;font-size:1.2rem;flex-shrink:0}
   #vfaq-{{ section.id }} .vfaq-a{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.22,1,0.36,1)}
   #vfaq-{{ section.id }} .vfaq-item.open .vfaq-a{max-height:400px}
   #vfaq-{{ section.id }} .vfaq-item.open .vfaq-icon{transform:rotate(45deg)}
-  #vfaq-{{ section.id }} .vfaq-ap{padding:0 0 1.4rem;font-size:0.92rem;line-height:1.76;color:#9B8FA3}
+  #vfaq-{{ section.id }} .vfaq-ap{padding:0 0 1.4rem;font-size:0.92rem;line-height:1.76;color:rgba(255,255,255,0.7)}
 </style>
 <div id="vfaq-{{ section.id }}">
   <div class="vfaq-in">
